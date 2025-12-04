@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import WexDesignSystem from './WexDesignSystem'
 import HealthBenefitsDashboard from './pages/HealthBenefitsDashboard'
 import BenefitsDashboardDraft from './pages/BenefitsDashboardDraft'
+import BenefitsDashboardV2 from './pages/BenefitsDashboardV2'
 import Homepage from './pages/Homepage'
 import './index.css'
 // PrimeReact Icons
@@ -18,6 +19,7 @@ const App = () => {
     { id: 'homepage', label: 'Homepage' },
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'draft', label: 'New Draft' },
+    { id: 'draft-v2', label: 'Draft V2' },
     { id: 'design-system', label: 'Design System' }
   ]
 
@@ -29,6 +31,8 @@ const App = () => {
         return <HealthBenefitsDashboard />
       case 'draft':
         return <BenefitsDashboardDraft />
+      case 'draft-v2':
+        return <BenefitsDashboardV2 />
       case 'design-system':
         return <WexDesignSystem />
       default:

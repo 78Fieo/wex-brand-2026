@@ -105,7 +105,7 @@ const WexSpendingChart = ({
   const totalSpending = Object.values(data).reduce((sum, val) => sum + val, 0);
 
   return (
-    <div className="bg-gradient-to-br from-white to-[#F5F8FF] p-8 rounded-3xl border border-[#E1E8FF]/80 shadow-md hover:shadow-lg transition-all relative overflow-hidden group">
+    <div className="bg-white/50 backdrop-blur-sm p-8 rounded-3xl border border-white/30 shadow-lg hover:shadow-xl transition-all relative overflow-hidden group">
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#1C6EFF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
       
       {/* Header */}

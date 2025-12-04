@@ -14,7 +14,7 @@ const WexAccountCard = ({
 }) => {
   return (
     <div 
-      className="bg-gradient-to-br from-white to-[#F5F8FF] p-6 rounded-2xl border border-[#E1E8FF]/80 shadow-sm hover:shadow-md transition-all cursor-pointer group relative overflow-hidden"
+      className="bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-white/30 shadow-lg hover:shadow-xl transition-all cursor-pointer group relative overflow-hidden"
       onClick={onClick}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#1C6EFF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>

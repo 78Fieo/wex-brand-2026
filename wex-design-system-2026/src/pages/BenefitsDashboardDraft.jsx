@@ -106,7 +106,7 @@ const BenefitsDashboardDraft = () => {
           {/* Account Cards Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {benefitAccounts.map((acc) => (
-              <div key={acc.id} className="bg-white p-5 rounded-2xl border border-[#E1E8FF]/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+              <div key={acc.id} className="bg-white/50 backdrop-blur-sm p-5 rounded-2xl border border-white/30 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group">
                 <div className="flex justify-between items-start mb-4">
                   <div className={`p-2 rounded-xl ${
                     acc.type === 'invest' ? 'bg-[#1C6EFF]/10 text-[#1C6EFF]' : 
@@ -154,7 +154,7 @@ const BenefitsDashboardDraft = () => {
                   { icon: Pill, label: 'Pharmacy Tool', color: '#00C48C' },
                   { icon: Stethoscope, label: 'Find Care', color: '#FFBC00' }
                 ].map((action, idx) => (
-                  <button key={idx} className="bg-white p-4 rounded-2xl border border-[#E1E8FF] shadow-sm hover:shadow-md hover:border-[#1C6EFF]/30 transition-all text-left group flex flex-col justify-between h-32 relative overflow-hidden">
+                  <button key={idx} className="bg-white/50 backdrop-blur-sm p-4 rounded-2xl border border-white/30 shadow-lg hover:shadow-xl hover:border-white/50 transition-all text-left group flex flex-col justify-between h-32 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#FDFDFF] to-[#F5F8FF] opacity-50 group-hover:opacity-100 transition-opacity"></div>
                     <div className="p-2 rounded-xl w-fit relative z-10" style={{backgroundColor: `${action.color}15`}}>
                       <action.icon className="w-5 h-5" style={{color: action.color}} />
@@ -171,7 +171,7 @@ const BenefitsDashboardDraft = () => {
             {/* ZONE D: DIGITAL WALLET */}
             <section>
                 <h3 className="text-xs font-bold text-[#7A87B2] uppercase tracking-wider mb-4 ml-1">Digital Wallet</h3>
-                <div className="bg-white p-6 rounded-2xl border border-[#E1E8FF] shadow-sm">
+                <div className="bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-white/30 shadow-lg">
                     {/* Card Visual */}
                     <div className="relative h-48 rounded-xl bg-gradient-to-br from-[#172DA1] via-[#1C6EFF] to-[#122385] p-6 text-white shadow-lg mb-6 overflow-hidden group">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
@@ -179,7 +179,7 @@ const BenefitsDashboardDraft = () => {
                         
                         <div className="relative z-10 flex flex-col justify-between h-full">
                             <div className="flex justify-between items-start">
-                                <div className="w-12 h-8 bg-white/20 rounded-md backdrop-blur-md border border-white/30"></div>
+                                <div className="w-12 h-8 bg-white/20 rounded-md backdrop-blur-sm border border-white/30"></div>
                                 <span className="font-bold italic text-lg opacity-90">VISA</span>
                             </div>
                             <div>
@@ -218,11 +218,11 @@ const BenefitsDashboardDraft = () => {
                 <h3 className="text-xs font-bold text-[#7A87B2] uppercase tracking-wider mb-4 ml-1">The Engagement Engine</h3>
                 
                 {/* Stack Effect Bottom Layers */}
-                <div className="absolute top-12 left-4 right-4 h-32 bg-white rounded-3xl border border-[#E1E8FF] shadow-sm opacity-40 scale-95 translate-y-4 z-0"></div>
-                <div className="absolute top-10 left-2 right-2 h-32 bg-white rounded-3xl border border-[#E1E8FF] shadow-sm opacity-70 scale-[0.98] translate-y-2 z-0"></div>
+                <div className="absolute top-12 left-4 right-4 h-32 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 shadow-sm opacity-40 scale-95 translate-y-4 z-0"></div>
+                <div className="absolute top-10 left-2 right-2 h-32 bg-white/15 backdrop-blur-lg rounded-3xl border border-white/25 shadow-sm opacity-70 scale-[0.98] translate-y-2 z-0"></div>
 
                 {/* Main Active Card */}
-                <div className="bg-white p-6 md:p-8 rounded-3xl border border-[#E1E8FF] shadow-lg relative z-10 overflow-hidden">
+                <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-white/30 shadow-xl relative z-10 overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#C8102E] to-[#FF032B]"></div>
                     
                     <div className="flex justify-between items-start mb-6">
@@ -260,7 +260,7 @@ const BenefitsDashboardDraft = () => {
                     <button className="text-xs font-bold text-[#1C6EFF] hover:underline">See All</button>
                 </div>
 
-                <div className="bg-white rounded-2xl border border-[#E1E8FF] shadow-sm divide-y divide-[#F0F4FF]">
+                <div className="bg-white/50 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg divide-y divide-white/20">
                     {transactions.map((tx) => (
                         <div key={tx.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-[#FDFDFF] transition-colors group cursor-pointer">
                             <div className="flex items-start gap-4">
