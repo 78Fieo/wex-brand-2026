@@ -4,7 +4,14 @@ import WexDesignSystem from './WexDesignSystem'
 import HealthBenefitsDashboard from './pages/HealthBenefitsDashboard'
 import BenefitsDashboardDraft from './pages/BenefitsDashboardDraft'
 import BenefitsDashboardV2 from './pages/BenefitsDashboardV2'
+import BenefitsDashboardV3 from './pages/BenefitsDashboardV3'
+import BenefitsDashboardV4 from './pages/BenefitsDashboardV4'
+import BenefitsDashboardV4_1 from './pages/BenefitsDashboardV4_1'
+import BenefitsDashboardV4_2 from './pages/BenefitsDashboardV4_2'
+import BenefitsDashboardV5 from './pages/BenefitsDashboardV5'
+import BenefitsDashboardV5_1 from './pages/BenefitsDashboardV5_1'
 import Homepage from './pages/Homepage'
+import WexViewNavigator from './components/ui/WexViewNavigator'
 import './index.css'
 // PrimeReact Icons
 import 'primeicons/primeicons.css'
@@ -13,13 +20,19 @@ import './themes/wex-prime-theme.css'
 
 // Simple App Router
 const App = () => {
-  const [view, setView] = useState('homepage') // 'design-system' | 'dashboard' | 'homepage'
+  const [view, setView] = useState('draft-v5-1')
 
   const views = [
     { id: 'homepage', label: 'Homepage' },
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'draft', label: 'New Draft' },
     { id: 'draft-v2', label: 'Draft V2' },
+    { id: 'draft-v3', label: 'Draft V3' },
+    { id: 'draft-v4', label: 'Draft V4 (AI)' },
+    { id: 'draft-v4-1', label: 'Draft V4.1' },
+    { id: 'draft-v4-2', label: 'Draft V4.2' },
+    { id: 'draft-v5', label: 'V5 AI-Forward' },
+    { id: 'draft-v5-1', label: 'V5.1 Morphing' },
     { id: 'design-system', label: 'Design System' }
   ]
 
@@ -33,6 +46,18 @@ const App = () => {
         return <BenefitsDashboardDraft />
       case 'draft-v2':
         return <BenefitsDashboardV2 />
+      case 'draft-v3':
+        return <BenefitsDashboardV3 />
+      case 'draft-v4':
+        return <BenefitsDashboardV4 />
+      case 'draft-v4-1':
+        return <BenefitsDashboardV4_1 />
+      case 'draft-v4-2':
+        return <BenefitsDashboardV4_2 />
+      case 'draft-v5':
+        return <BenefitsDashboardV5 />
+      case 'draft-v5-1':
+        return <BenefitsDashboardV5_1 />
       case 'design-system':
         return <WexDesignSystem />
       default:
@@ -42,24 +67,12 @@ const App = () => {
 
   return (
     <>
-      {/* View Toggle - Floating Button */}
-      <div className="fixed bottom-6 right-6 z-[100]">
-        <div className="bg-white rounded-full shadow-lg border border-[#E1E8FF] p-2 flex gap-2">
-          {views.map((v) => (
-            <button
-              key={v.id}
-              onClick={() => setView(v.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                view === v.id
-                  ? 'bg-[#172DA1] text-white shadow-md'
-                  : 'text-[#5D688C] hover:bg-[#EDF1FF]'
-              }`}
-            >
-              {v.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Expand/Collapse View Navigator */}
+      <WexViewNavigator 
+        views={views} 
+        activeView={view} 
+        onViewChange={setView} 
+      />
 
       {renderView()}
     </>
@@ -71,5 +84,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>,
 )
-
-

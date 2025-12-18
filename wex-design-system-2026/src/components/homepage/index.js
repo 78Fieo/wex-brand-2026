@@ -8,3 +8,15 @@ export { default as WexStatsSection } from './WexStatsSection';
 export { default as WexNavHeader } from './WexNavHeader';
 export { default as WexFooter } from './WexFooter';
 
+
+
+
+
+
+
+
+
+
+
+
+

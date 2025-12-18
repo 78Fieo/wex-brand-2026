@@ -6,17 +6,21 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "kill-server": "lsof -ti:5173 | xargs kill -9 2>/dev/null || echo 'No server running on port 5173'"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.26",
     "lucide-react": "^0.460.0",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.7",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
@@ -26,4 +30,3 @@
     "vite": "^6.0.1"
   }
 }
-
