@@ -107,65 +107,72 @@ const BenefitsDashboardV4_1 = () => {
       userName="Sarah Johnson"
       userEmail="sarah@wexinc.com"
     >
-      {/* HERO SECTION - Branded Banner */}
-      <section className="relative overflow-hidden">
-        {/* Abstract Gradient Background */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            background: 'linear-gradient(135deg, #E8D5F0 0%, #D4DCF5 25%, #C5D4F5 50%, #DDE5F9 75%, #F0F4FC 100%)',
-          }}
-        />
+      {/* HERO SECTION - Branded Banner (SVG Recreation) */}
+      <section className="relative overflow-hidden min-h-[400px]">
         
-        {/* Abstract fluid shapes overlay */}
-        <div className="absolute inset-0 z-[1] overflow-hidden">
-          {/* Main fluid blob - purple/pink */}
-          <div 
-            className="absolute top-0 right-[10%] w-[500px] h-[400px] opacity-60"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(180, 140, 200, 0.6) 0%, rgba(180, 140, 200, 0.3) 40%, transparent 70%)',
-              transform: 'rotate(-15deg)',
-              filter: 'blur(40px)',
-            }}
-          />
-          {/* Secondary blob - blue/teal */}
-          <div 
-            className="absolute top-[20%] right-[5%] w-[300px] h-[350px] opacity-50"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(140, 180, 220, 0.5) 0%, rgba(140, 180, 220, 0.2) 50%, transparent 70%)',
-              transform: 'rotate(25deg)',
-              filter: 'blur(30px)',
-            }}
-          />
-          {/* Accent blob - pink highlight */}
-          <div 
-            className="absolute top-[10%] right-[25%] w-[200px] h-[200px] opacity-40"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(220, 160, 200, 0.6) 0%, transparent 60%)',
-              filter: 'blur(25px)',
-            }}
-          />
-        </div>
-        
-        {/* SVG Chevron Lines */}
+        {/* Full SVG Background */}
         <svg 
-          className="absolute inset-0 w-full h-full z-[2]" 
-          viewBox="0 0 800 400" 
-          preserveAspectRatio="xMidYMid slice"
-          style={{ opacity: 0.4 }}
+          className="absolute inset-0 w-full h-full z-0" 
+          viewBox="0 0 1440 400" 
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {[...Array(12)].map((_, i) => (
-            <path
-              key={i}
-              d={`M ${-100 + i * 70},400 L ${100 + i * 70},200 L ${-100 + i * 70},0`}
-              fill="none"
-              stroke="#A8B8D8"
-              strokeWidth="1"
-              opacity={0.5}
-            />
-          ))}
+          <defs>
+            {/* 1. Main Background Gradient */}
+            <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" />       {/* Top Left: Pure White */}
+              <stop offset="30%" stopColor="#F0F7FF" />      {/* Soft Light Blue */}
+              <stop offset="70%" stopColor="#DDEBFF" />      {/* Sky Blue center */}
+              <stop offset="100%" stopColor="#93C5FD" />     {/* Bottom Right: Bright Sky Blue */}
+            </linearGradient>
+
+            {/* 2. Line Gradient - Fades from transparent to cyan/white to simulate light reflection */}
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#7DD3FC" stopOpacity="0" />
+              <stop offset="20%" stopColor="#7DD3FC" stopOpacity="0.1" />
+              <stop offset="60%" stopColor="#38BDF8" stopOpacity="0.4" />
+              <stop offset="95%" stopColor="#FFFFFF" stopOpacity="0.8" /> {/* Bright tip */}
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+            </linearGradient>
+
+            {/* 3. Glow Filter for the "Neon" effect */}
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Background Rectangle */}
+          <rect width="100%" height="100%" fill="url(#heroBg)" />
+
+          {/* Chevron Group */}
+          <g className="opacity-80">
+            {/* We create the chevron shape with a path. 
+                M = Move to, L = Line to. 
+                Shape: Start Left, Go Center Right, Go Left Bottom. */}
+            {[...Array(20)].map((_, i) => {
+               // Spacing calculation
+               const xOffset = i * 60; 
+               const opacity = 0.3 + (i / 20) * 0.7; // Fade in as we go right
+               
+               return (
+                <path
+                  key={i}
+                  d={`M ${-400 + xOffset},0 L ${0 + xOffset},200 L ${-400 + xOffset},400`}
+                  fill="none"
+                  stroke="url(#lineGradient)"
+                  strokeWidth={i > 15 ? 2 : 1} // Thicker lines on the right
+                  style={{ opacity: opacity }}
+                  className="transition-all duration-1000"
+                />
+               );
+            })}
+          </g>
+
+          {/* Extra Glow Highlight in Top Right Corner */}
+          <circle cx="100%" cy="0%" r="300" fill="url(#lineGradient)" fillOpacity="0.1" filter="url(#glow)" />
         </svg>
-        
+
         {/* Content Layer */}
         <div className="relative z-10 px-8 pt-6 pb-8">
           {/* Header with Date and Export */}
@@ -191,25 +198,34 @@ const BenefitsDashboardV4_1 = () => {
             glowIntensity="intense"
             showBehindGlow={false}
           >
-            <div className="rounded-2xl p-5 shadow-lg">
+            <div className="rounded-2xl p-6 shadow-lg">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1C6EFF] to-[#172DA1] flex items-center justify-center shrink-0">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1C6EFF] to-[#172DA1] flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
+                  <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-[#172DA1] mb-3">
-                    <span className="font-semibold">Good afternoon, Sarah.</span> I noticed a $340 dental charge from yesterday. Want me to file this claim against your FSA?
-                  </p>
+                <div className="flex-1 pt-1">
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-bold text-[#1a1a2e] mb-2 tracking-tight">
+                      Good afternoon, Sarah.
+                    </h2>
+                    <p className="text-[#5D688C] text-[15px] leading-relaxed">
+                      I noticed a <span className="font-bold text-[#172DA1]">$340</span> dental charge from yesterday. 
+                      <span className="block sm:inline sm:ml-1">
+                        Want me to file this claim against your <span className="font-semibold text-[#1a1a2e]">FSA</span>?
+                      </span>
+                    </p>
+                  </div>
+                  
                   <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 bg-[#172DA1] hover:bg-[#122385] text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
+                    <button className="flex items-center gap-2 bg-[#172DA1] hover:bg-[#122385] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md shadow-blue-900/10 hover:shadow-lg hover:-translate-y-0.5">
                       <Check className="w-4 h-4" />
                       Yes, File It
                     </button>
-                    <button className="flex items-center gap-2 bg-white border border-[#E1E8FF] hover:bg-[#F5F7FF] text-[#172DA1] px-4 py-2 rounded-xl text-sm font-semibold transition-colors">
+                    <button className="flex items-center gap-2 bg-white border border-[#E1E8FF] hover:bg-[#F8F9FC] text-[#172DA1] px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:border-[#172DA1]/20 hover:shadow-sm">
                       <CreditCard className="w-4 h-4" />
                       Show Details
                     </button>
-                    <button className="text-sm text-[#7A87B2] hover:text-[#172DA1] transition-colors">
+                    <button className="text-sm text-[#7A87B2] hover:text-[#5D688C] transition-colors px-2 underline decoration-transparent hover:decoration-[#7A87B2]/40 underline-offset-4 font-medium">
                       Not now
                     </button>
                   </div>
@@ -217,7 +233,7 @@ const BenefitsDashboardV4_1 = () => {
               </div>
               
               {/* Search Bar */}
-              <div className="mt-4 pt-4 border-t border-[#E1E8FF]">
+              <div className="mt-5 pt-4 border-t border-[#E1E8FF]">
                 <div className="relative">
                   <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#7A87B2]" />
                   <input 
