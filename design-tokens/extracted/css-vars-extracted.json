@@ -1,0 +1,513 @@
+{
+  "meta": {
+    "extractedAt": "2025-12-19T14:56:59.784Z",
+    "sources": [
+      "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "wex-design-system-2026/src/index.css"
+    ],
+    "totalVariables": 41
+  },
+  "raw": {
+    ":root": {
+      "--primary-color": {
+        "value": "#C8102E",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 8,
+        "hsl": "hsl(350 85% 42%)"
+      },
+      "--primary-color-text": {
+        "value": "#ffffff",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 9,
+        "hsl": "hsl(0 0% 100%)"
+      },
+      "--primary-50": {
+        "value": "#FFE5E9",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 10,
+        "hsl": "hsl(351 100% 95%)"
+      },
+      "--primary-100": {
+        "value": "#FFB8C4",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 11,
+        "hsl": "hsl(350 100% 86%)"
+      },
+      "--primary-200": {
+        "value": "#FF8A9F",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 12,
+        "hsl": "hsl(349 100% 77%)"
+      },
+      "--primary-300": {
+        "value": "#FF5C7A",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 13,
+        "hsl": "hsl(349 100% 68%)"
+      },
+      "--primary-400": {
+        "value": "#FF2E55",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 14,
+        "hsl": "hsl(349 100% 59%)"
+      },
+      "--primary-500": {
+        "value": "#C8102E",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 15,
+        "hsl": "hsl(350 85% 42%)"
+      },
+      "--primary-600": {
+        "value": "#A00D25",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 16,
+        "hsl": "hsl(350 85% 34%)"
+      },
+      "--primary-700": {
+        "value": "#780A1C",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 17,
+        "hsl": "hsl(350 85% 25%)"
+      },
+      "--primary-800": {
+        "value": "#500713",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 18,
+        "hsl": "hsl(350 84% 17%)"
+      },
+      "--primary-900": {
+        "value": "#28040A",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 19,
+        "hsl": "hsl(350 82% 9%)"
+      },
+      "--surface-ground": {
+        "value": "#FDFDFF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 22,
+        "hsl": "hsl(240 100% 100%)"
+      },
+      "--surface-section": {
+        "value": "#F5F8FF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 23,
+        "hsl": "hsl(222 100% 98%)"
+      },
+      "--surface-card": {
+        "value": "#FFFFFF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 24,
+        "hsl": "hsl(0 0% 100%)"
+      },
+      "--surface-overlay": {
+        "value": "rgba(255, 255, 255, 0.95)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 25
+      },
+      "--surface-border": {
+        "value": "#E1E8FF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 26,
+        "hsl": "hsl(226 100% 94%)"
+      },
+      "--surface-hover": {
+        "value": "#EDF1FF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 27,
+        "hsl": "hsl(227 100% 96%)"
+      },
+      "--text-color": {
+        "value": "#172DA1",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 30,
+        "hsl": "hsl(230 75% 36%)"
+      },
+      "--text-color-secondary": {
+        "value": "#5D688C",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 31,
+        "hsl": "hsl(226 20% 46%)"
+      },
+      "--text-muted-color": {
+        "value": "#7A87B2",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 32,
+        "hsl": "hsl(226 27% 59%)"
+      },
+      "--text-color-disabled": {
+        "value": "#B1C0EE",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 33,
+        "hsl": "hsl(225 64% 81%)"
+      },
+      "--content-border-color": {
+        "value": "#E1E8FF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 36,
+        "hsl": "hsl(226 100% 94%)"
+      },
+      "--divider-color": {
+        "value": "#E1E8FF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 37,
+        "hsl": "hsl(226 100% 94%)"
+      },
+      "--maskbg": {
+        "value": "rgba(0, 0, 0, 0.4)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 38
+      },
+      "--focus-ring": {
+        "value": "0 0 0 2px rgba(28, 110, 255, 0.2)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 41
+      },
+      "--focus-ring-offset": {
+        "value": "0",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 42
+      },
+      "--border-radius": {
+        "value": "0.75rem",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 45
+      },
+      "--border-radius-sm": {
+        "value": "0.5rem",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 46
+      },
+      "--border-radius-lg": {
+        "value": "1rem",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 47
+      },
+      "--border-radius-xl": {
+        "value": "1.5rem",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 48
+      },
+      "--shadow-sm": {
+        "value": "0 2px 4px rgba(23, 45, 161, 0.08)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 51
+      },
+      "--shadow": {
+        "value": "0 4px 12px rgba(23, 45, 161, 0.12)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 52
+      },
+      "--shadow-md": {
+        "value": "0 8px 24px rgba(23, 45, 161, 0.15)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 53
+      },
+      "--shadow-lg": {
+        "value": "0 12px 40px rgba(23, 45, 161, 0.18)",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 54
+      },
+      "--accent-blue": {
+        "value": "#1C6EFF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 57,
+        "hsl": "hsl(218 100% 55%)"
+      },
+      "--accent-yellow": {
+        "value": "#FFBC00",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 58,
+        "hsl": "hsl(44 100% 50%)"
+      },
+      "--success-color": {
+        "value": "#00C48C",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 59,
+        "hsl": "hsl(163 100% 38%)"
+      },
+      "--warning-color": {
+        "value": "#FFBC00",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 60,
+        "hsl": "hsl(44 100% 50%)"
+      },
+      "--error-color": {
+        "value": "#C8102E",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 61,
+        "hsl": "hsl(350 85% 42%)"
+      },
+      "--info-color": {
+        "value": "#1C6EFF",
+        "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+        "sourceLine": 62,
+        "hsl": "hsl(218 100% 55%)"
+      }
+    }
+  },
+  "categorized": {
+    "primary": {
+      ":root": {
+        "--primary-color": {
+          "value": "#C8102E",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 8,
+          "hsl": "hsl(350 85% 42%)"
+        },
+        "--primary-color-text": {
+          "value": "#ffffff",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 9,
+          "hsl": "hsl(0 0% 100%)"
+        },
+        "--primary-50": {
+          "value": "#FFE5E9",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 10,
+          "hsl": "hsl(351 100% 95%)"
+        },
+        "--primary-100": {
+          "value": "#FFB8C4",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 11,
+          "hsl": "hsl(350 100% 86%)"
+        },
+        "--primary-200": {
+          "value": "#FF8A9F",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 12,
+          "hsl": "hsl(349 100% 77%)"
+        },
+        "--primary-300": {
+          "value": "#FF5C7A",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 13,
+          "hsl": "hsl(349 100% 68%)"
+        },
+        "--primary-400": {
+          "value": "#FF2E55",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 14,
+          "hsl": "hsl(349 100% 59%)"
+        },
+        "--primary-500": {
+          "value": "#C8102E",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 15,
+          "hsl": "hsl(350 85% 42%)"
+        },
+        "--primary-600": {
+          "value": "#A00D25",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 16,
+          "hsl": "hsl(350 85% 34%)"
+        },
+        "--primary-700": {
+          "value": "#780A1C",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 17,
+          "hsl": "hsl(350 85% 25%)"
+        },
+        "--primary-800": {
+          "value": "#500713",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 18,
+          "hsl": "hsl(350 84% 17%)"
+        },
+        "--primary-900": {
+          "value": "#28040A",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 19,
+          "hsl": "hsl(350 82% 9%)"
+        }
+      }
+    },
+    "surface": {
+      ":root": {
+        "--surface-ground": {
+          "value": "#FDFDFF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 22,
+          "hsl": "hsl(240 100% 100%)"
+        },
+        "--surface-section": {
+          "value": "#F5F8FF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 23,
+          "hsl": "hsl(222 100% 98%)"
+        },
+        "--surface-card": {
+          "value": "#FFFFFF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 24,
+          "hsl": "hsl(0 0% 100%)"
+        },
+        "--surface-overlay": {
+          "value": "rgba(255, 255, 255, 0.95)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 25
+        },
+        "--surface-border": {
+          "value": "#E1E8FF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 26,
+          "hsl": "hsl(226 100% 94%)"
+        },
+        "--surface-hover": {
+          "value": "#EDF1FF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 27,
+          "hsl": "hsl(227 100% 96%)"
+        }
+      }
+    },
+    "text": {
+      ":root": {
+        "--text-color": {
+          "value": "#172DA1",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 30,
+          "hsl": "hsl(230 75% 36%)"
+        },
+        "--text-color-secondary": {
+          "value": "#5D688C",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 31,
+          "hsl": "hsl(226 20% 46%)"
+        },
+        "--text-muted-color": {
+          "value": "#7A87B2",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 32,
+          "hsl": "hsl(226 27% 59%)"
+        },
+        "--text-color-disabled": {
+          "value": "#B1C0EE",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 33,
+          "hsl": "hsl(225 64% 81%)"
+        }
+      }
+    },
+    "border": {
+      ":root": {
+        "--content-border-color": {
+          "value": "#E1E8FF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 36,
+          "hsl": "hsl(226 100% 94%)"
+        },
+        "--divider-color": {
+          "value": "#E1E8FF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 37,
+          "hsl": "hsl(226 100% 94%)"
+        },
+        "--border-radius": {
+          "value": "0.75rem",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 45
+        },
+        "--border-radius-sm": {
+          "value": "0.5rem",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 46
+        },
+        "--border-radius-lg": {
+          "value": "1rem",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 47
+        },
+        "--border-radius-xl": {
+          "value": "1.5rem",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 48
+        }
+      }
+    },
+    "shadow": {
+      ":root": {
+        "--shadow-sm": {
+          "value": "0 2px 4px rgba(23, 45, 161, 0.08)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 51
+        },
+        "--shadow": {
+          "value": "0 4px 12px rgba(23, 45, 161, 0.12)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 52
+        },
+        "--shadow-md": {
+          "value": "0 8px 24px rgba(23, 45, 161, 0.15)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 53
+        },
+        "--shadow-lg": {
+          "value": "0 12px 40px rgba(23, 45, 161, 0.18)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 54
+        }
+      }
+    },
+    "radius": {},
+    "accent": {
+      ":root": {
+        "--accent-blue": {
+          "value": "#1C6EFF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 57,
+          "hsl": "hsl(218 100% 55%)"
+        },
+        "--accent-yellow": {
+          "value": "#FFBC00",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 58,
+          "hsl": "hsl(44 100% 50%)"
+        },
+        "--success-color": {
+          "value": "#00C48C",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 59,
+          "hsl": "hsl(163 100% 38%)"
+        },
+        "--warning-color": {
+          "value": "#FFBC00",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 60,
+          "hsl": "hsl(44 100% 50%)"
+        },
+        "--error-color": {
+          "value": "#C8102E",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 61,
+          "hsl": "hsl(350 85% 42%)"
+        },
+        "--info-color": {
+          "value": "#1C6EFF",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 62,
+          "hsl": "hsl(218 100% 55%)"
+        }
+      }
+    },
+    "other": {
+      ":root": {
+        "--maskbg": {
+          "value": "rgba(0, 0, 0, 0.4)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 38
+        },
+        "--focus-ring": {
+          "value": "0 0 0 2px rgba(28, 110, 255, 0.2)",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 41
+        },
+        "--focus-ring-offset": {
+          "value": "0",
+          "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+          "sourceLine": 42
+        }
+      }
+    }
+  }
+}

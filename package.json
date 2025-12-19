@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "tokens:extract": "node design-tokens/extract-css-vars.js"
+  },
   "dependencies": {
     "react-icons": "^5.5.0"
   }

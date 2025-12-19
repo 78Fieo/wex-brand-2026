@@ -1,0 +1,663 @@
+{
+  "meta": {
+    "sourceRepo": "WEX Brand 2026/wex-design-system-2026",
+    "extractedAt": "2025-12-19T00:00:00.000Z",
+    "notes": "Brand exploration theme tokens extracted from Tailwind config, CSS variables, and component usage patterns. This represents the 2026 brand evolution with a glass/gradient-forward aesthetic."
+  },
+  "modes": ["light"],
+  "palette": {
+    "brand": {
+      "red": {
+        "DEFAULT": "#C8102E",
+        "DEFAULT.hsl": "hsl(350, 86%, 42%)",
+        "dark": "#A00D25",
+        "dark.hsl": "hsl(350, 85%, 34%)",
+        "light": "#FF032B",
+        "light.hsl": "hsl(350, 100%, 50%)"
+      },
+      "blue": {
+        "main": "#172DA1",
+        "main.hsl": "hsl(230, 77%, 36%)",
+        "dark": "#122385",
+        "dark.hsl": "hsl(230, 77%, 30%)",
+        "accent": "#1C6EFF",
+        "accent.hsl": "hsl(217, 100%, 55%)",
+        "deep": "#25146F",
+        "deep.hsl": "hsl(256, 69%, 26%)"
+      },
+      "yellow": {
+        "DEFAULT": "#FFBC00",
+        "DEFAULT.hsl": "hsl(44, 100%, 50%)",
+        "dark": "#E5A800",
+        "dark.hsl": "hsl(44, 100%, 45%)"
+      },
+      "purple": {
+        "deep": "#2E0055",
+        "deep.hsl": "hsl(279, 100%, 17%)",
+        "hero": "#25146F",
+        "hero.hsl": "hsl(256, 69%, 26%)",
+        "dark": "#1E105A",
+        "dark.hsl": "hsl(253, 71%, 21%)"
+      }
+    },
+    "neutral": {
+      "white": "#FFFFFF",
+      "pale": "#FDFDFF",
+      "pale.hsl": "hsl(240, 100%, 99%)",
+      "light": "#EDF1FF",
+      "light.hsl": "hsl(226, 100%, 96%)",
+      "sectionBg": "#F5F8FF",
+      "sectionBg.hsl": "hsl(220, 100%, 98%)",
+      "softBg": "#F5F7FF",
+      "softBg.hsl": "hsl(228, 100%, 98%)",
+      "surfaceHover": "#F0F4FF",
+      "surfaceHover.hsl": "hsl(224, 100%, 97%)"
+    },
+    "accent": {
+      "success": "#00C48C",
+      "success.hsl": "hsl(160, 100%, 38%)",
+      "warning": "#FFBC00",
+      "warning.hsl": "hsl(44, 100%, 50%)",
+      "error": "#C8102E",
+      "error.hsl": "hsl(350, 86%, 42%)",
+      "info": "#1C6EFF",
+      "info.hsl": "hsl(217, 100%, 55%)"
+    }
+  },
+  "semantic": {
+    "background": {
+      "page": "#FDFDFF",
+      "page.hsl": "hsl(240, 100%, 99%)",
+      "section": "#F5F8FF",
+      "section.hsl": "hsl(220, 100%, 98%)",
+      "card": "#FFFFFF",
+      "card.hsl": "hsl(0, 0%, 100%)",
+      "overlay": "rgba(255, 255, 255, 0.95)",
+      "glassTint": "rgba(255, 255, 255, 0.5)",
+      "scrollbarTrack": "#F0F4FF",
+      "heroGradient": "linear-gradient(to bottom right, #2E0055, #172DA1, #C8102E)",
+      "lightGradient": "linear-gradient(to bottom, #FDFDFF, #F0F4FF)",
+      "darkGradient": "linear-gradient(to bottom right, #25146F, #1E105A)",
+      "footerGradient": "linear-gradient(to bottom right, #25146F, #1E105A)"
+    },
+    "foreground": {
+      "DEFAULT": "#172DA1",
+      "DEFAULT.hsl": "hsl(230, 77%, 36%)"
+    },
+    "surface": {
+      "ground": "#FDFDFF",
+      "ground.hsl": "hsl(240, 100%, 99%)",
+      "section": "#F5F8FF",
+      "section.hsl": "hsl(220, 100%, 98%)",
+      "card": "#FFFFFF",
+      "overlay": "rgba(255, 255, 255, 0.95)",
+      "hover": "#EDF1FF",
+      "hover.hsl": "hsl(226, 100%, 96%)",
+      "cardGradient": "linear-gradient(135deg, #FFFFFF, #F5F8FF)"
+    },
+    "text": {
+      "primary": "#172DA1",
+      "primary.hsl": "hsl(230, 77%, 36%)",
+      "secondary": "#5D688C",
+      "secondary.hsl": "hsl(228, 20%, 46%)",
+      "muted": "#7A87B2",
+      "muted.hsl": "hsl(227, 26%, 59%)",
+      "disabled": "#B1C0EE",
+      "disabled.hsl": "hsl(222, 62%, 81%)",
+      "onDark": "#FFFFFF",
+      "onDarkMuted": "rgba(255, 255, 255, 0.7)",
+      "onDarkSubtle": "rgba(255, 255, 255, 0.8)",
+      "link": "#C8102E",
+      "link.hsl": "hsl(350, 86%, 42%)"
+    },
+    "border": {
+      "DEFAULT": "#E1E8FF",
+      "DEFAULT.hsl": "hsl(226, 100%, 94%)",
+      "subtle": "rgba(225, 232, 255, 0.8)",
+      "subtler": "rgba(225, 232, 255, 0.6)",
+      "input": "#B1C0EE",
+      "input.hsl": "hsl(222, 62%, 81%)",
+      "glass": "rgba(255, 255, 255, 0.3)",
+      "glassHover": "rgba(255, 255, 255, 0.4)",
+      "onDark": "rgba(255, 255, 255, 0.2)",
+      "onDarkHover": "rgba(255, 255, 255, 0.4)"
+    },
+    "ring": {
+      "focus": "0 0 0 2px rgba(28, 110, 255, 0.2)",
+      "focusInput": "0 0 0 2px rgba(28, 110, 255, 0.20)",
+      "highlighted": "2px solid rgba(28, 110, 255, 0.2)"
+    },
+    "primary": {
+      "DEFAULT": "#C8102E",
+      "DEFAULT.hsl": "hsl(350, 86%, 42%)",
+      "text": "#FFFFFF",
+      "50": "#FFE5E9",
+      "100": "#FFB8C4",
+      "200": "#FF8A9F",
+      "300": "#FF5C7A",
+      "400": "#FF2E55",
+      "500": "#C8102E",
+      "600": "#A00D25",
+      "700": "#780A1C",
+      "800": "#500713",
+      "900": "#28040A",
+      "gradient": "linear-gradient(to right, #C8102E, #FF032B)",
+      "gradientHover": "linear-gradient(to right, #FF032B, #FF3355)",
+      "buttonGradient": "linear-gradient(135deg, #C8102E, #FF032B)"
+    },
+    "secondary": {
+      "DEFAULT": "#172DA1",
+      "DEFAULT.hsl": "hsl(230, 77%, 36%)",
+      "hover": "#1C6EFF",
+      "hover.hsl": "hsl(217, 100%, 55%)"
+    },
+    "muted": {
+      "DEFAULT": "#7A87B2",
+      "DEFAULT.hsl": "hsl(227, 26%, 59%)",
+      "background": "#EDF1FF",
+      "background.hsl": "hsl(226, 100%, 96%)"
+    },
+    "success": {
+      "DEFAULT": "#00C48C",
+      "DEFAULT.hsl": "hsl(160, 100%, 38%)"
+    },
+    "warning": {
+      "DEFAULT": "#FFBC00",
+      "DEFAULT.hsl": "hsl(44, 100%, 50%)"
+    },
+    "danger": {
+      "DEFAULT": "#C8102E",
+      "DEFAULT.hsl": "hsl(350, 86%, 42%)"
+    },
+    "info": {
+      "DEFAULT": "#1C6EFF",
+      "DEFAULT.hsl": "hsl(217, 100%, 55%)"
+    }
+  },
+  "shape": {
+    "radius": {
+      "sm": "0.5rem",
+      "DEFAULT": "0.75rem",
+      "lg": "1rem",
+      "xl": "1.5rem",
+      "2xl": "2rem",
+      "3xl": "1.875rem",
+      "full": "9999px",
+      "wexFrame": "0.75rem"
+    },
+    "borderWidth": {
+      "DEFAULT": "1px",
+      "2": "2px",
+      "3": "3px"
+    }
+  },
+  "elevation": {
+    "shadow": {
+      "sm": "0 2px 4px rgba(23, 45, 161, 0.08)",
+      "DEFAULT": "0 4px 12px rgba(23, 45, 161, 0.12)",
+      "md": "0 8px 24px rgba(23, 45, 161, 0.15)",
+      "lg": "0 12px 40px rgba(23, 45, 161, 0.18)",
+      "wexOmbre": "0 8px 30px -8px rgba(23, 45, 161, 0.18), 0 4px 20px -4px rgba(200, 16, 46, 0.12)",
+      "primaryGlow": "0 4px 12px rgba(200, 16, 46, 0.3)",
+      "primaryGlowIntense": "0 4px 12px rgba(200, 16, 46, 0.3)"
+    },
+    "overlay": {
+      "mask": "rgba(0, 0, 0, 0.4)",
+      "backdrop": "rgba(0, 0, 0, 0.5)"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": ["Inter", "system-ui", "sans-serif"]
+    },
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem"
+    },
+    "fontWeight": {
+      "normal": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "lineHeight": {
+      "tight": "1.1",
+      "snug": "1.25",
+      "normal": "1.5",
+      "relaxed": "1.625"
+    },
+    "letterSpacing": {
+      "tighter": "-0.05em",
+      "tight": "-0.025em",
+      "normal": "0em",
+      "wide": "0.025em",
+      "wider": "0.05em",
+      "widest": "0.2em"
+    }
+  },
+  "spacing": {
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.25rem",
+    "6": "1.5rem",
+    "8": "2rem",
+    "10": "2.5rem",
+    "12": "3rem",
+    "16": "4rem",
+    "24": "6rem"
+  },
+  "motion": {
+    "duration": {
+      "fast": "150ms",
+      "DEFAULT": "200ms",
+      "slow": "300ms",
+      "slower": "500ms",
+      "animation": "1000ms"
+    },
+    "easing": {
+      "DEFAULT": "ease",
+      "in": "ease-in",
+      "out": "ease-out",
+      "inOut": "ease-in-out",
+      "cubicOut": "cubic-bezier(0.4, 0, 0.6, 1)"
+    }
+  },
+  "gradients": {
+    "hero": {
+      "default": "linear-gradient(to bottom right, #2E0055, #172DA1, #C8102E)",
+      "overlay": "linear-gradient(to right, transparent, rgba(28, 110, 255, 0.1), transparent)",
+      "glowYellow": "linear-gradient(to bottom left, rgba(255, 188, 0, 0.2), transparent)",
+      "glowRed": "linear-gradient(to top right, rgba(200, 16, 46, 0.3), transparent)"
+    },
+    "surface": {
+      "card": "linear-gradient(135deg, #FFFFFF, #F5F8FF)",
+      "page": "linear-gradient(to bottom, #FDFDFF, #F0F4FF)",
+      "pageAlt": "linear-gradient(to bottom, #F0F4FF, #FDFDFF)"
+    },
+    "dark": {
+      "footer": "linear-gradient(to bottom right, #25146F, #1E105A)",
+      "hero": "linear-gradient(to bottom right, #25146F, #1E105A)",
+      "mobile": "linear-gradient(to bottom right, #25146F, #1E105A)"
+    },
+    "button": {
+      "primary": "linear-gradient(to right, #C8102E, #FF032B)",
+      "primaryHover": "linear-gradient(to right, #FF032B, #FF3355)",
+      "progress": "linear-gradient(90deg, #C8102E, #1C6EFF)"
+    },
+    "decorative": {
+      "hoverOverlay": "linear-gradient(135deg, transparent, rgba(28, 110, 255, 0.05), transparent)",
+      "highlightBorder": "linear-gradient(to right, #1C6EFF, #C8102E, #FFBC00)",
+      "aiGlow": "linear-gradient(135deg, rgba(46, 0, 85, 0.4), rgba(23, 45, 161, 0.3), rgba(28, 110, 255, 0.2), rgba(200, 16, 46, 0.3))",
+      "balanceGauge": "linear-gradient(0deg, #25146F, #172DA1, #1C6EFF)",
+      "avatarBorder": "linear-gradient(to bottom right, #1C6EFF, #172DA1)"
+    }
+  },
+  "references": [
+    {
+      "tokenPath": "palette.brand.red.DEFAULT",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "17",
+      "originalName": "wex.red"
+    },
+    {
+      "tokenPath": "palette.brand.red.dark",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "18",
+      "originalName": "wex.red-dark"
+    },
+    {
+      "tokenPath": "palette.brand.red.light",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "19",
+      "originalName": "wex.red-light"
+    },
+    {
+      "tokenPath": "palette.brand.blue.main",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "20",
+      "originalName": "wex.blue-main"
+    },
+    {
+      "tokenPath": "palette.brand.blue.dark",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "21",
+      "originalName": "wex.blue-dark"
+    },
+    {
+      "tokenPath": "palette.brand.blue.accent",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "22",
+      "originalName": "wex.blue-accent"
+    },
+    {
+      "tokenPath": "palette.brand.blue.deep",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "23",
+      "originalName": "wex.blue-deep"
+    },
+    {
+      "tokenPath": "palette.brand.yellow.DEFAULT",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "24",
+      "originalName": "wex.yellow"
+    },
+    {
+      "tokenPath": "palette.brand.yellow.dark",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "25",
+      "originalName": "wex.yellow-dark"
+    },
+    {
+      "tokenPath": "palette.accent.success",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "26",
+      "originalName": "wex.success"
+    },
+    {
+      "tokenPath": "palette.neutral.pale",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "27",
+      "originalName": "wex.pale"
+    },
+    {
+      "tokenPath": "palette.neutral.light",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "28",
+      "originalName": "wex.light"
+    },
+    {
+      "tokenPath": "elevation.shadow.wexOmbre",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "32",
+      "originalName": "boxShadow.wex-ombre"
+    },
+    {
+      "tokenPath": "shape.radius.wexFrame",
+      "sourceFile": "wex-design-system-2026/tailwind.config.js",
+      "sourceLineRange": "35",
+      "originalName": "borderRadius.wex-frame"
+    },
+    {
+      "tokenPath": "semantic.primary.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "8",
+      "originalName": "--primary-color"
+    },
+    {
+      "tokenPath": "semantic.primary.50",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "10",
+      "originalName": "--primary-50"
+    },
+    {
+      "tokenPath": "semantic.primary.100",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "11",
+      "originalName": "--primary-100"
+    },
+    {
+      "tokenPath": "semantic.primary.200",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "12",
+      "originalName": "--primary-200"
+    },
+    {
+      "tokenPath": "semantic.primary.300",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "13",
+      "originalName": "--primary-300"
+    },
+    {
+      "tokenPath": "semantic.primary.400",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "14",
+      "originalName": "--primary-400"
+    },
+    {
+      "tokenPath": "semantic.primary.500",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "15",
+      "originalName": "--primary-500"
+    },
+    {
+      "tokenPath": "semantic.primary.600",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "16",
+      "originalName": "--primary-600"
+    },
+    {
+      "tokenPath": "semantic.primary.700",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "17",
+      "originalName": "--primary-700"
+    },
+    {
+      "tokenPath": "semantic.primary.800",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "18",
+      "originalName": "--primary-800"
+    },
+    {
+      "tokenPath": "semantic.primary.900",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "19",
+      "originalName": "--primary-900"
+    },
+    {
+      "tokenPath": "semantic.surface.ground",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "22",
+      "originalName": "--surface-ground"
+    },
+    {
+      "tokenPath": "semantic.surface.section",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "23",
+      "originalName": "--surface-section"
+    },
+    {
+      "tokenPath": "semantic.surface.card",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "24",
+      "originalName": "--surface-card"
+    },
+    {
+      "tokenPath": "semantic.surface.overlay",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "25",
+      "originalName": "--surface-overlay"
+    },
+    {
+      "tokenPath": "semantic.border.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "26",
+      "originalName": "--surface-border"
+    },
+    {
+      "tokenPath": "semantic.surface.hover",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "27",
+      "originalName": "--surface-hover"
+    },
+    {
+      "tokenPath": "semantic.text.primary",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "30",
+      "originalName": "--text-color"
+    },
+    {
+      "tokenPath": "semantic.text.secondary",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "31",
+      "originalName": "--text-color-secondary"
+    },
+    {
+      "tokenPath": "semantic.text.muted",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "32",
+      "originalName": "--text-muted-color"
+    },
+    {
+      "tokenPath": "semantic.text.disabled",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "33",
+      "originalName": "--text-color-disabled"
+    },
+    {
+      "tokenPath": "semantic.ring.focus",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "41",
+      "originalName": "--focus-ring"
+    },
+    {
+      "tokenPath": "shape.radius.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "45",
+      "originalName": "--border-radius"
+    },
+    {
+      "tokenPath": "shape.radius.sm",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "46",
+      "originalName": "--border-radius-sm"
+    },
+    {
+      "tokenPath": "shape.radius.lg",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "47",
+      "originalName": "--border-radius-lg"
+    },
+    {
+      "tokenPath": "shape.radius.xl",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "48",
+      "originalName": "--border-radius-xl"
+    },
+    {
+      "tokenPath": "elevation.shadow.sm",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "51",
+      "originalName": "--shadow-sm"
+    },
+    {
+      "tokenPath": "elevation.shadow.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "52",
+      "originalName": "--shadow"
+    },
+    {
+      "tokenPath": "elevation.shadow.md",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "53",
+      "originalName": "--shadow-md"
+    },
+    {
+      "tokenPath": "elevation.shadow.lg",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "54",
+      "originalName": "--shadow-lg"
+    },
+    {
+      "tokenPath": "palette.brand.blue.accent",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "57",
+      "originalName": "--accent-blue"
+    },
+    {
+      "tokenPath": "palette.brand.yellow.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "58",
+      "originalName": "--accent-yellow"
+    },
+    {
+      "tokenPath": "semantic.success.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "59",
+      "originalName": "--success-color"
+    },
+    {
+      "tokenPath": "semantic.warning.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "60",
+      "originalName": "--warning-color"
+    },
+    {
+      "tokenPath": "semantic.danger.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "61",
+      "originalName": "--error-color"
+    },
+    {
+      "tokenPath": "semantic.info.DEFAULT",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "62",
+      "originalName": "--info-color"
+    },
+    {
+      "tokenPath": "typography.fontFamily.sans",
+      "sourceFile": "wex-design-system-2026/src/themes/wex-prime-theme.css",
+      "sourceLineRange": "67",
+      "originalName": ".p-component font-family"
+    },
+    {
+      "tokenPath": "gradients.hero.default",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "25",
+      "originalName": "variants.default.bg"
+    },
+    {
+      "tokenPath": "gradients.surface.page",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "30",
+      "originalName": "variants.light.bg"
+    },
+    {
+      "tokenPath": "gradients.dark.hero",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "36",
+      "originalName": "variants.dark.bg"
+    },
+    {
+      "tokenPath": "palette.brand.purple.deep",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "25",
+      "originalName": "inline hex #2E0055"
+    },
+    {
+      "tokenPath": "palette.brand.purple.hero",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "36",
+      "originalName": "inline hex #25146F"
+    },
+    {
+      "tokenPath": "palette.brand.purple.dark",
+      "sourceFile": "wex-design-system-2026/src/components/homepage/WexHero.jsx",
+      "sourceLineRange": "36",
+      "originalName": "inline hex #1E105A"
+    },
+    {
+      "tokenPath": "semantic.background.scrollbarTrack",
+      "sourceFile": "wex-design-system-2026/src/index.css",
+      "sourceLineRange": "17",
+      "originalName": "::-webkit-scrollbar-track background"
+    },
+    {
+      "tokenPath": "semantic.border.input",
+      "sourceFile": "wex-design-system-2026/src/index.css",
+      "sourceLineRange": "20-21",
+      "originalName": "::-webkit-scrollbar-thumb background"
+    }
+  ]
+}
+
