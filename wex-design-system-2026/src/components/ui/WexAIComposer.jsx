@@ -210,7 +210,7 @@ export function WexAIComposer({ mood = "modernist", className = "", hideChips = 
               <button
                 onClick={() => submit(value)}
                 disabled={!value.trim()}
-                className="bg-[#172DA1] text-white px-4 md:px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-[#1C6EFF] transition-all duration-200 flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="bg-gradient-to-br from-[#2E0055] via-[#172DA1] to-[#C8102E] text-white px-4 md:px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 hover:shadow-lg hover:shadow-[#C8102E]/30 transition-all duration-200 flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <Send size={14} />
                 <span className="hidden md:inline">Ask</span>

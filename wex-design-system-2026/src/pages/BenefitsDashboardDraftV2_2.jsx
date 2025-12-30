@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WexDashboardShellV2 from '../components/layouts/WexDashboardShellV2';
+import WexDashboardShellTopNav from '../components/layouts/WexDashboardShellTopNav';
 import { 
   ArrowUp, ChevronRight, Search, Bell,
   Camera, CreditCard, Pill, Stethoscope, FileText, 
@@ -9,15 +9,11 @@ import {
 import heroBackground from '../assets/backgrounds/light-background.png';
 import cardBackground from '../assets/backgrounds/card bg.jpg';
 
-const AccountMiniCard = ({ name, balance, unusedYear, unusedAmount, deadline, daysRemaining, isPrimary = false }) => {
+const AccountMiniCard = ({ name, balance, unusedYear, unusedAmount, deadline, daysRemaining }) => {
   const hasDeadline = deadline && daysRemaining;
   
   return (
-    <div className={`group rounded-2xl p-5 transition-all duration-300 cursor-pointer relative overflow-hidden min-h-[120px] flex flex-col justify-center ${
-      isPrimary 
-        ? 'bg-gradient-to-br from-white to-[#F5F8FF] border-2 border-[#C8DCFF] shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/15' 
-        : 'bg-white/70 backdrop-blur-sm border border-white/50 hover:bg-white hover:shadow-lg hover:border-[#E1E8FF]'
-    }`}>
+    <div className="group bg-white/70 backdrop-blur-sm rounded-2xl border border-white/50 p-5 hover:bg-white hover:shadow-lg hover:border-[#E1E8FF] transition-all duration-300 cursor-pointer relative overflow-hidden min-h-[120px] flex flex-col justify-center">
       {/* Default Content */}
       <div className="relative z-10">
         <p className="text-sm font-medium text-[#5D688C] mb-2">
@@ -49,8 +45,8 @@ const AccountMiniCard = ({ name, balance, unusedYear, unusedAmount, deadline, da
   );
 };
 
-const BenefitsDashboardV2 = () => {
-  const [activeSidebarItem, setActiveSidebarItem] = useState('overview');
+const BenefitsDashboardDraftV2_2 = () => {
+  const [activeNavItem, setActiveNavItem] = useState('overview');
 
   // Mock Data for Zone A
   const benefitAccounts = [
@@ -76,16 +72,16 @@ const BenefitsDashboardV2 = () => {
   ];
 
   return (
-    <WexDashboardShellV2
+    <WexDashboardShellTopNav
       title=""
-      activeSidebarItem={activeSidebarItem}
-      onSidebarItemClick={setActiveSidebarItem}
+      activeNavItem={activeNavItem}
+      onNavItemClick={setActiveNavItem}
       userName="Elizabeth Davis"
       userEmail="elizabeth@wexinc.com"
     >
 
-      {/* HERO SECTION - Full bleed to top and edges */}
-      <section className="relative -mt-0 overflow-hidden">
+      {/* HERO SECTION - Full bleed to edges */}
+      <section className="relative overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 z-0"
@@ -98,38 +94,36 @@ const BenefitsDashboardV2 = () => {
         />
         
         {/* Content Layer */}
-        <div className="relative z-10 px-8 pt-6 pb-8">
+        <div className="relative z-10 px-6 lg:px-8 pt-8 pb-10">
           {/* Top Bar - Search, Actions */}
           <div className="flex items-center justify-between mb-12">
             <h1 className="text-3xl font-bold text-black tracking-tight">Overview</h1>
             
             <div className="flex items-center gap-4">
-              {/* Search */}
-              <div className="relative group/search">
+              {/* Search - visible on mobile here since top nav hides it */}
+              <div className="relative group/search lg:hidden">
                 <Search className="w-4 h-4 text-[#7A87B2] absolute left-4 top-3 group-focus-within/search:text-[#1C6EFF] transition-colors" />
                 <input 
-                  className="pl-11 pr-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full text-sm border border-white/50 focus:border-[#1C6EFF]/30 focus:bg-white focus:ring-2 focus:ring-[#1C6EFF]/20 w-56 transition-all shadow-sm placeholder-[#7A87B2]" 
-                  placeholder="Search anything..." 
+                  className="pl-11 pr-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full text-sm border border-white/50 focus:border-[#1C6EFF]/30 focus:bg-white focus:ring-2 focus:ring-[#1C6EFF]/20 w-48 transition-all shadow-sm placeholder-[#7A87B2]" 
+                  placeholder="Search..." 
                 />
               </div>
               
               {/* Reimburse Myself Button */}
               <button className="bg-[#1C6EFF] hover:bg-[#172DA1] text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all flex items-center gap-2">
                 <i className="pi pi-wallet text-base"></i>
-                Reimburse myself
+                <span className="hidden sm:inline">Reimburse myself</span>
+                <span className="sm:hidden">Reimburse</span>
               </button>
             </div>
           </div>
 
           {/* Account Balance */}
           <div className="mb-10">
-            <p className="text-sm font-semibold text-[#5D688C] mb-1 uppercase tracking-wider">Account Balance</p>
-            <div className="flex items-baseline">
-              <span className="text-4xl font-medium text-[#7A87B2] mr-1">$</span>
-              <h2 className="text-6xl md:text-7xl font-bold text-[#172DA1] tracking-tighter">
-                120,544<span className="text-3xl md:text-4xl text-[#7A87B2] font-normal">.00</span>
-              </h2>
-            </div>
+            <p className="text-sm font-medium text-[#5D688C] mb-2">Account Balance</p>
+            <h2 className="text-5xl md:text-6xl font-bold text-[#172DA1] tracking-tight">
+              $120,544<span className="text-3xl md:text-4xl text-[#7A87B2]">.00</span>
+            </h2>
           </div>
 
           {/* Account Cards Row */}
@@ -143,8 +137,7 @@ const BenefitsDashboardV2 = () => {
                 unusedYear: '2025',
                 unusedAmount: '$250.00',
                 deadline: 'File by 3/31/2026',
-                daysRemaining: '90 days',
-                isPrimary: true
+                daysRemaining: '90 days'
               },
               { 
                 name: 'Lifestyle FSA', 
@@ -181,7 +174,7 @@ const BenefitsDashboardV2 = () => {
       </section>
 
       {/* Main Content Area */}
-      <div className="px-8 py-8">
+      <div className="px-6 lg:px-8 py-8">
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* LEFT COLUMN (Quick Actions + Digital Wallet) */}
@@ -196,24 +189,15 @@ const BenefitsDashboardV2 = () => {
                   { icon: Pill, label: 'Pharmacy Tool', color: '#00C48C' },
                   { icon: Stethoscope, label: 'Find Care', color: '#FFBC00' }
                 ].map((action, idx) => (
-                  <button key={idx} className="bg-white p-4 rounded-2xl border border-[#E1E8FF] hover:border-[#1C6EFF]/50 hover:shadow-lg hover:shadow-blue-500/5 transition-all text-left group flex flex-col justify-between h-32 relative overflow-hidden">
-                    {/* Hover chevron in corner */}
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <ChevronRight className="w-4 h-4 text-[#1C6EFF]" />
-                    </div>
-                    
-                    {/* Icon Bubble with scale animation */}
-                    <div 
-                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" 
-                      style={{backgroundColor: `${action.color}15`}}
-                    >
+                  <button key={idx} className="bg-white p-4 rounded-2xl border border-[#E1E8FF] hover:border-[#1C6EFF] transition-all text-left group flex flex-col justify-between h-32 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FDFDFF] to-[#F5F8FF] opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="p-2 rounded-xl w-fit relative z-10" style={{backgroundColor: `${action.color}15`}}>
                       <action.icon className="w-5 h-5" style={{color: action.color}} />
                     </div>
-                    
-                    {/* Label */}
-                    <span className="text-sm font-bold text-[#172DA1] leading-tight group-hover:text-[#1C6EFF] transition-colors duration-200">
-                      {action.label}
-                    </span>
+                    <div className="flex items-center justify-between w-full relative z-10">
+                      <span className="text-sm font-bold text-[#172DA1] leading-tight max-w-[70%]">{action.label}</span>
+                      <ChevronRight className="w-4 h-4 text-[#B1C0EE] group-hover:text-[#1C6EFF] group-hover:translate-x-1 transition-all" />
+                    </div>
                   </button>
                 ))}
               </div>
@@ -353,9 +337,9 @@ const BenefitsDashboardV2 = () => {
       </div>
       </div>
 
-    </WexDashboardShellV2>
+    </WexDashboardShellTopNav>
   );
 };
 
-export default BenefitsDashboardV2;
+export default BenefitsDashboardDraftV2_2;
 
