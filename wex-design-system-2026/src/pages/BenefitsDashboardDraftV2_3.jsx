@@ -284,7 +284,7 @@ const BenefitsDashboardDraftV2_3 = () => {
                         </div>
 
                         <div className="flex justify-end">
-                          <button className="px-4 py-2 rounded-lg bg-gradient-to-b from-[#1C6EFF] to-[#1560E5] text-white text-xs font-bold hover:from-[#1560E5] hover:to-[#122385] active:shadow-wex-card-pressed transition-all shadow-wex-sm hover:shadow-wex-md whitespace-nowrap">
+                          <button className="px-4 py-2 rounded-lg bg-gradient-to-b from-[#172DA1] to-[#122385] text-white text-xs font-bold hover:from-[#122385] hover:to-[#0F1D6B] active:shadow-wex-card-pressed transition-all shadow-wex-sm hover:shadow-wex-md whitespace-nowrap">
                             {todo.action}
                           </button>
                         </div>
@@ -348,12 +348,12 @@ const BenefitsDashboardDraftV2_3 = () => {
                   <div className="p-6">
                   {/* Card Visual - Enhanced depth */}
                   <div className="relative h-44 rounded-xl mb-5 overflow-hidden group bg-[#1C6EFF] shadow-wex-lg hover:shadow-wex-xl transition-shadow duration-300">
-                    {/* Background Image Layer */}
+                    {/* Background Image Layer - Stretched to fill entire card */}
                     <div 
                       className="absolute inset-0 z-0"
                       style={{
                         backgroundImage: `url(${cardBackground})`,
-                        backgroundSize: 'cover',
+                        backgroundSize: '100% 100%',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                       }}
@@ -366,7 +366,7 @@ const BenefitsDashboardDraftV2_3 = () => {
                     <div className="relative z-10 p-5 flex flex-col justify-between h-full text-white">
                       <div className="flex justify-between items-start">
                         <div className="w-10 h-7 bg-white/20 rounded-md backdrop-blur-sm border border-white/30 shadow-sm"></div>
-                        <span className="font-bold italic text-base opacity-90 drop-shadow-sm">VISA</span>
+                        <span className="font-bold italic text-base opacity-90 drop-shadow-sm">WEX</span>
                       </div>
                       <div>
                         <p className="text-xs opacity-80 font-medium mb-1 drop-shadow-sm">Health Savings Account</p>

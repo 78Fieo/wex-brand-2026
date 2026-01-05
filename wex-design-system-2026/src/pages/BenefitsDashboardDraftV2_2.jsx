@@ -110,7 +110,7 @@ const BenefitsDashboardDraftV2_2 = () => {
               </div>
               
               {/* Reimburse Myself Button */}
-              <button className="bg-[#1C6EFF] hover:bg-[#172DA1] text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all flex items-center gap-2">
+              <button className="bg-[#172DA1] hover:bg-[#122385] text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all flex items-center gap-2">
                 <i className="pi pi-wallet text-base"></i>
                 <span className="hidden sm:inline">Reimburse myself</span>
                 <span className="sm:hidden">Reimburse</span>
@@ -209,12 +209,12 @@ const BenefitsDashboardDraftV2_2 = () => {
                 <div className="bg-white p-6 rounded-2xl border border-[#E1E8FF]">
                     {/* Card Visual */}
                     <div className="relative h-48 rounded-xl shadow-lg mb-6 overflow-hidden group bg-[#1C6EFF]">
-                        {/* Background Image Layer - Absolute to ensure full coverage */}
+                        {/* Background Image Layer - Stretched to fill entire card */}
                         <div 
                           className="absolute inset-0 z-0"
                           style={{
                             backgroundImage: `url(${cardBackground})`,
-                            backgroundSize: 'cover',
+                            backgroundSize: '100% 100%',
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                           }}
@@ -224,7 +224,7 @@ const BenefitsDashboardDraftV2_2 = () => {
                         <div className="relative z-10 p-6 flex flex-col justify-between h-full text-white">
                             <div className="flex justify-between items-start">
                                 <div className="w-12 h-8 bg-white/20 rounded-md backdrop-blur-sm border border-white/30"></div>
-                                <span className="font-bold italic text-lg opacity-90">VISA</span>
+                                <span className="font-bold italic text-lg opacity-90">WEX</span>
                             </div>
                             <div>
                                 <p className="text-sm opacity-80 font-medium mb-1">Health Savings Account</p>
@@ -282,7 +282,7 @@ const BenefitsDashboardDraftV2_2 = () => {
                             </div>
 
                             <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto pl-16 md:pl-0">
-                                <button className="px-4 py-2 rounded-lg bg-[#1C6EFF] text-white text-xs font-bold hover:bg-[#122385] transition-colors shadow-sm whitespace-nowrap">
+                                <button className="px-4 py-2 rounded-lg bg-[#172DA1] text-white text-xs font-bold hover:bg-[#122385] transition-colors shadow-sm whitespace-nowrap">
                                     {todo.action}
                                 </button>
                             </div>
@@ -322,7 +322,7 @@ const BenefitsDashboardDraftV2_2 = () => {
                                      <span className="px-3 py-1 rounded-full bg-[#FFF0F2] text-[#C8102E] text-xs font-bold">Action Req.</span>
                                 )}
                                  {tx.status === 'confirm' && (
-                                     <button className="px-4 py-1.5 rounded-lg bg-[#1C6EFF] text-white text-xs font-bold hover:bg-[#122385] transition-colors shadow-sm">Confirm</button>
+                                     <button className="px-4 py-1.5 rounded-lg bg-[#172DA1] text-white text-xs font-bold hover:bg-[#122385] transition-colors shadow-sm">Confirm</button>
                                 )}
                                 
                                 <span className={`font-bold font-mono text-right ${tx.amount > 0 ? 'text-[#00C48C]' : 'text-[#172DA1]'} min-w-[80px]`}>

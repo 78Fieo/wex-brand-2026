@@ -16,6 +16,7 @@ import BenefitsDashboardDraftV2_2 from './pages/BenefitsDashboardDraftV2_2'
 import BenefitsDashboardDraftV2_3 from './pages/BenefitsDashboardDraftV2_3'
 import BenefitsDashboardV6 from './pages/BenefitsDashboardV6'
 import Homepage from './pages/Homepage'
+import DraftsIndex from './pages/DraftsIndex'
 import WexViewNavigator from './components/ui/WexViewNavigator'
 import './index.css'
 // PrimeReact Icons
@@ -25,9 +26,10 @@ import './themes/wex-prime-theme.css'
 
 // Simple App Router
 const App = () => {
-  const [view, setView] = useState('draft-v6')
+  const [view, setView] = useState('drafts-index')
 
   const views = [
+    { id: 'drafts-index', label: 'All Drafts' },
     { id: 'homepage', label: 'Homepage' },
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'draft', label: 'New Draft' },
@@ -48,6 +50,8 @@ const App = () => {
 
   const renderView = () => {
     switch (view) {
+      case 'drafts-index':
+        return <DraftsIndex onViewChange={setView} />
       case 'homepage':
         return <Homepage />
       case 'dashboard':
@@ -81,15 +85,14 @@ const App = () => {
       case 'design-system':
         return <WexDesignSystem />
       default:
-        return <Homepage />
+        return <DraftsIndex onViewChange={setView} />
     }
   }
 
   return (
     <>
-      {/* Expand/Collapse View Navigator */}
+      {/* Simple "See All Drafts" button */}
       <WexViewNavigator 
-        views={views} 
         activeView={view} 
         onViewChange={setView} 
       />

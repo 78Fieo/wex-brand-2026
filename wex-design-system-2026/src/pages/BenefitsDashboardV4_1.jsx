@@ -4,7 +4,8 @@ import { AIGlowBorder } from '@/components/ui/moving-border';
 import { 
   Search, Sparkles, TrendingUp, TrendingDown, MoreHorizontal,
   Heart, Smile, Pill, Eye, Plus, CreditCard, Filter, Check,
-  Calendar, Baby, ArrowRight
+  Calendar, Baby, ArrowRight, Clock, AlertCircle, FileText, 
+  CheckCircle2, Upload, DollarSign
 } from 'lucide-react';
 
 /**
@@ -13,6 +14,7 @@ import {
  */
 const BenefitsDashboardV4_1 = () => {
   const [activeSidebarItem, setActiveSidebarItem] = useState('overview');
+  const [activeActivityView, setActiveActivityView] = useState('fsa'); // 'fsa' | 'claims' | 'hsa'
 
   // Current date
   const currentDate = new Date().toLocaleDateString('en-US', { 
@@ -25,40 +27,83 @@ const BenefitsDashboardV4_1 = () => {
   // Mock data
   const kpiCards = [
     { 
-      label: 'Available Balance', 
-      value: 75876.00, 
+      label: 'HSA Account', 
+      value: 4847.12, 
       trend: 'up', 
       trendValue: 12, 
-      subtext: '+$1,560 from last month',
+      subtext: '$2,100 invested',
+      icon: Heart
+    },
+    { 
+      label: 'FSA Account', 
+      value: 1200.00, 
+      trend: 'up', 
+      trendValue: 0, 
+      subtext: '2 claims pending',
       icon: CreditCard
     },
     { 
-      label: 'Inflows', 
-      value: 15876.00, 
+      label: 'Dependent Care Account', 
+      value: 2400.00, 
       trend: 'up', 
-      trendValue: 17, 
-      subtext: '+$2,560 from last month',
-      icon: TrendingUp
-    },
-    { 
-      label: 'Outflows', 
-      value: 5876.00, 
-      trend: 'down', 
-      trendValue: 12, 
-      subtext: '-$560 from last month',
-      icon: TrendingDown
+      trendValue: 0, 
+      subtext: 'Active through Dec 31',
+      icon: Baby
     },
   ];
 
-  const benefitUtilizationData = [
-    { year: '2019', value: 45 },
-    { year: '2020', value: 60 },
-    { year: '2021', value: 85 },
-    { year: '2022', value: 140 },
-    { year: '2023', value: 180 },
-    { year: '2024', value: 230 },
-    { year: '2025', value: 295 },
-  ];
+  // FSA Runway Data
+  const fsaData = {
+    total: 2850,
+    remaining: 1200,
+    spent: 1650,
+    daysLeft: 13,
+    deadline: 'Dec 31, 2025',
+    projectedUnused: 340,
+    eligibleUnclaimed: 340,
+    monthlySpend: [
+      { month: 'Jan', spent: 180 },
+      { month: 'Feb', spent: 220 },
+      { month: 'Mar', spent: 150 },
+      { month: 'Apr', spent: 280 },
+      { month: 'May', spent: 190 },
+      { month: 'Jun', spent: 210 },
+      { month: 'Jul', spent: 160 },
+      { month: 'Aug', spent: 260 },
+      { month: 'Sep', spent: 0 },
+      { month: 'Oct', spent: 0 },
+      { month: 'Nov', spent: 0 },
+      { month: 'Dec', spent: 0 },
+    ]
+  };
+
+  // Claims Pipeline Data
+  const claimsData = {
+    eligible: { count: 3, amount: 540 },
+    needsReceipt: { count: 2, amount: 340 },
+    submitted: { count: 1, amount: 125 },
+    pending: { count: 2, amount: 465 },
+    paid: { count: 8, amount: 1650 },
+  };
+
+  // HSA Investment Data
+  const hsaData = {
+    totalBalance: 4847.12,
+    investedBalance: 2100,
+    cashBalance: 2747.12,
+    ytdReturn: 12.4,
+    ytdGain: 231.84,
+    performanceData: [
+      { month: 'Jan', value: 1850 },
+      { month: 'Feb', value: 1920 },
+      { month: 'Mar', value: 1880 },
+      { month: 'Apr', value: 1950 },
+      { month: 'May', value: 2010 },
+      { month: 'Jun', value: 1980 },
+      { month: 'Jul', value: 2050 },
+      { month: 'Aug', value: 2100 },
+    ]
+  };
 
   const spendingBreakdown = [
     { category: 'Healthcare', description: 'Regular payments to providers', amount: 9450, icon: Heart, color: '#C8102E' },
@@ -82,23 +127,25 @@ const BenefitsDashboardV4_1 = () => {
     }
   };
 
-  // SVG Chart for Benefit Utilization
-  const maxValue = Math.max(...benefitUtilizationData.map(d => d.value));
-  const chartHeight = 160;
-  const chartWidth = 700;
-  const paddingLeft = 35;
-  const paddingRight = 20;
-  const paddingTop = 20;
-  const paddingBottom = 30;
+  // Activity view tabs
+  const activityViews = [
+    { id: 'fsa', label: 'FSA Runway', icon: Calendar },
+    { id: 'claims', label: 'Claims', icon: FileText },
+    { id: 'hsa', label: 'HSA Investment', icon: TrendingUp },
+  ];
 
-  const points = benefitUtilizationData.map((d, i) => {
-    const x = paddingLeft + (i / (benefitUtilizationData.length - 1)) * (chartWidth - paddingLeft - paddingRight);
-    const y = chartHeight - paddingBottom - (d.value / maxValue) * (chartHeight - paddingTop - paddingBottom);
+  // HSA Performance chart calculations
+  const hsaChartHeight = 80;
+  const hsaChartWidth = 300;
+  const hsaMaxValue = Math.max(...hsaData.performanceData.map(d => d.value));
+  const hsaMinValue = Math.min(...hsaData.performanceData.map(d => d.value));
+  const hsaPoints = hsaData.performanceData.map((d, i) => {
+    const x = (i / (hsaData.performanceData.length - 1)) * hsaChartWidth;
+    const y = hsaChartHeight - ((d.value - hsaMinValue) / (hsaMaxValue - hsaMinValue)) * hsaChartHeight;
     return { x, y, ...d };
   });
-
-  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
-  const areaPath = `${linePath} L ${points[points.length - 1].x} ${chartHeight - paddingBottom} L ${points[0].x} ${chartHeight - paddingBottom} Z`;
+  const hsaLinePath = hsaPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+  const hsaAreaPath = `${hsaLinePath} L ${hsaPoints[hsaPoints.length - 1].x} ${hsaChartHeight} L ${hsaPoints[0].x} ${hsaChartHeight} Z`;
 
   return (
     <WexDashboardShellV2
@@ -177,7 +224,7 @@ const BenefitsDashboardV4_1 = () => {
         <div className="relative z-10 px-8 pt-6 pb-8">
           {/* Header with Date and Export */}
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-[#172DA1]">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-[#172DA1]">Overview</h1>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-[#5D688C]">
                 <Calendar className="w-4 h-4" />
@@ -185,7 +232,7 @@ const BenefitsDashboardV4_1 = () => {
               </div>
               <button className="flex items-center gap-2 bg-[#172DA1] hover:bg-[#122385] text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors shadow-lg shadow-blue-900/20">
                 <TrendingDown className="w-4 h-4" />
-                Export
+                Reimburse myself
               </button>
             </div>
           </div>
@@ -253,26 +300,25 @@ const BenefitsDashboardV4_1 = () => {
 
         {/* KPI Cards Row */}
         <div className="grid grid-cols-3 gap-4 mb-6">
-          {kpiCards.map((kpi, idx) => (
+          {kpiCards.map((kpi, idx) => {
+            const Icon = kpi.icon;
+            return (
             <div key={idx} className="bg-white rounded-2xl border border-[#E1E8FF] p-5 shadow-sm">
               <div className="flex items-start justify-between mb-3">
                 <p className="text-sm text-[#5D688C] font-medium">{kpi.label}</p>
-                <div className={`p-2 rounded-xl ${kpi.trend === 'up' ? 'bg-[#EDF1FF] text-[#1C6EFF]' : 'bg-[#FFF0F2] text-[#C8102E]'}`}>
-                  {kpi.trend === 'up' ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-5" />}
+                <div className="p-2 rounded-xl bg-[#EDF1FF] text-[#1C6EFF]">
+                  {Icon && <Icon className="w-5 h-5" />}
                 </div>
               </div>
-              <div className="flex items-baseline gap-2 mb-1">
+              <div className="mb-1">
                 <span className="text-3xl font-bold text-[#172DA1]">
                   ${kpi.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                </span>
-                <span className={`text-sm font-semibold flex items-center gap-1 ${kpi.trend === 'up' ? 'text-[#059669]' : 'text-[#C8102E]'}`}>
-                  {kpi.trend === 'up' ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                  {kpi.trendValue}%
                 </span>
               </div>
               <p className="text-xs text-[#7A87B2]">{kpi.subtext}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Main Bento Grid - Two Columns */}
@@ -281,94 +327,236 @@ const BenefitsDashboardV4_1 = () => {
           {/* LEFT COLUMN - Benefit Utilization + Recent Transactions */}
           <div className="col-span-7 space-y-6">
             
-            {/* Benefit Utilization Card */}
+            {/* Account Activity Card - Toggleable Views */}
             <div className="bg-white rounded-2xl border border-[#E1E8FF] p-6 shadow-sm">
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#EDF1FF] flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-[#1C6EFF]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#172DA1]">Benefit Utilization</h3>
-                    <p className="text-xs text-[#7A87B2]">Your spending over time</p>
-                  </div>
-                </div>
-                <button className="p-2 hover:bg-[#F5F7FF] rounded-lg transition-colors">
-                  <MoreHorizontal className="w-5 h-5 text-[#7A87B2]" />
-                </button>
-              </div>
-              
-              <div className="flex items-baseline gap-3 mb-4">
-                <span className="text-4xl font-bold text-[#1C6EFF]">$12,876.00</span>
-                <span className="text-sm font-semibold text-[#059669] flex items-center gap-1">
-                  <TrendingUp className="w-3 h-3" />
-                  12%
-                </span>
-              </div>
-
-              {/* Chart */}
-              <div className="h-44 w-full mt-2">
-                <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                  {/* Grid lines */}
-                  {[0, 100, 200, 300].map((val, i) => {
-                    const y = chartHeight - paddingBottom - (val / 300) * (chartHeight - paddingTop - paddingBottom);
+              {/* Header with Toggle Pills */}
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-bold text-[#172DA1]">Account Activity</h3>
+                <div className="flex items-center gap-1 bg-[#F5F7FF] rounded-xl p-1">
+                  {activityViews.map((view) => {
+                    const Icon = view.icon;
                     return (
-                      <g key={i}>
-                        <line 
-                          x1={paddingLeft} 
-                          y1={y} 
-                          x2={chartWidth - paddingRight} 
-                          y2={y} 
-                          stroke="#E1E8FF" 
-                          strokeDasharray="4 4"
-                        />
-                        <text x={paddingLeft - 8} y={y + 4} textAnchor="end" fontSize="11" className="fill-[#7A87B2]">
-                          {val}
-                        </text>
-                      </g>
+                      <button
+                        key={view.id}
+                        onClick={() => setActiveActivityView(view.id)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                          activeActivityView === view.id
+                            ? 'bg-white text-[#172DA1] shadow-sm'
+                            : 'text-[#7A87B2] hover:text-[#5D688C]'
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        {view.label}
+                      </button>
                     );
                   })}
-                  
-                  {/* X-axis labels */}
-                  {points.map((p, i) => (
-                    <text 
-                      key={i} 
-                      x={p.x} 
-                      y={chartHeight - 10} 
-                      textAnchor="middle" 
-                      fontSize="11"
-                      className="fill-[#7A87B2]"
-                    >
-                      {p.year}
-                    </text>
-                  ))}
-
-                  {/* Area fill */}
-                  <defs>
-                    <linearGradient id="areaGradientV41" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#1C6EFF" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#1C6EFF" stopOpacity="0.05" />
-                    </linearGradient>
-                  </defs>
-                  <path d={areaPath} fill="url(#areaGradientV41)" />
-                  
-                  {/* Line */}
-                  <path d={linePath} fill="none" stroke="#1C6EFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  
-                  {/* Data points */}
-                  {points.map((p, i) => (
-                    <circle 
-                      key={i} 
-                      cx={p.x} 
-                      cy={p.y} 
-                      r="4" 
-                      fill="white" 
-                      stroke="#1C6EFF" 
-                      strokeWidth="2.5"
-                    />
-                  ))}
-                </svg>
+                </div>
               </div>
+
+              {/* FSA Runway View */}
+              {activeActivityView === 'fsa' && (
+                <div className="space-y-5">
+                  {/* Balance Overview */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-xs text-[#7A87B2] mb-1">Remaining Balance</p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-[#172DA1]">${fsaData.remaining.toLocaleString()}</span>
+                        <span className="text-sm text-[#7A87B2]">of ${fsaData.total.toLocaleString()}</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="flex items-center gap-1.5 text-[#C8102E] mb-1">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-sm font-bold">{fsaData.daysLeft} days left</span>
+                      </div>
+                      <p className="text-xs text-[#7A87B2]">Expires {fsaData.deadline}</p>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div>
+                    <div className="h-3 bg-[#E1E8FF] rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-[#1C6EFF] to-[#172DA1] rounded-full transition-all"
+                        style={{ width: `${(fsaData.spent / fsaData.total) * 100}%` }}
+                      />
+                    </div>
+                    <div className="flex justify-between mt-2 text-xs">
+                      <span className="text-[#1C6EFF] font-semibold">${fsaData.spent.toLocaleString()} spent</span>
+                      <span className="text-[#7A87B2]">${fsaData.remaining.toLocaleString()} remaining</span>
+                    </div>
+                  </div>
+
+                  {/* Alert: Eligible Unclaimed */}
+                  {fsaData.eligibleUnclaimed > 0 && (
+                    <div className="flex items-center gap-3 p-3 bg-[#FFF9E6] border border-[#FFE082] rounded-xl">
+                      <div className="w-8 h-8 rounded-lg bg-[#FFE082] flex items-center justify-center">
+                        <AlertCircle className="w-4 h-4 text-[#B8860B]" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-[#5D4E37]">
+                          ${fsaData.eligibleUnclaimed} eligible, not yet claimed
+                        </p>
+                        <p className="text-xs text-[#8B7355]">From Dental Excellence (yesterday)</p>
+                      </div>
+                      <button className="text-xs font-bold text-[#B8860B] hover:text-[#8B6914] flex items-center gap-1">
+                        File Claim <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Projection */}
+                  <div className="flex items-center justify-between p-3 bg-[#F5F7FF] rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <TrendingDown className="w-4 h-4 text-[#7A87B2]" />
+                      <span className="text-sm text-[#5D688C]">Projected unused by deadline</span>
+                    </div>
+                    <span className="text-sm font-bold text-[#C8102E]">${fsaData.projectedUnused}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Claims Pipeline View */}
+              {activeActivityView === 'claims' && (
+                <div className="space-y-4">
+                  {/* Pipeline Stages */}
+                  <div className="space-y-3">
+                    {/* Eligible Transactions */}
+                    <div className="flex items-center justify-between p-3 bg-[#F5F7FF] rounded-xl group hover:bg-[#EDF1FF] transition-colors cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#E1E8FF] flex items-center justify-center">
+                          <DollarSign className="w-4 h-4 text-[#1C6EFF]" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#172DA1]">Eligible Transactions</p>
+                          <p className="text-xs text-[#7A87B2]">Ready to file</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-[#172DA1]">${claimsData.eligible.amount}</p>
+                        <p className="text-xs text-[#7A87B2]">{claimsData.eligible.count} items</p>
+                      </div>
+                    </div>
+
+                    {/* Needs Receipt */}
+                    <div className="flex items-center justify-between p-3 bg-[#FFF9E6] rounded-xl group hover:bg-[#FFF3CD] transition-colors cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#FFE082] flex items-center justify-center">
+                          <Upload className="w-4 h-4 text-[#B8860B]" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#5D4E37]">Needs Receipt</p>
+                          <p className="text-xs text-[#8B7355]">Upload documentation</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-[#B8860B]">${claimsData.needsReceipt.amount}</p>
+                        <p className="text-xs text-[#8B7355]">{claimsData.needsReceipt.count} items</p>
+                      </div>
+                    </div>
+
+                    {/* Pending Review */}
+                    <div className="flex items-center justify-between p-3 bg-[#F0F4FF] rounded-xl group hover:bg-[#E8EDFF] transition-colors cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#C7D2FE] flex items-center justify-center">
+                          <Clock className="w-4 h-4 text-[#4F46E5]" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#172DA1]">Pending Review</p>
+                          <p className="text-xs text-[#7A87B2]">Under processing</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-[#4F46E5]">${claimsData.pending.amount}</p>
+                        <p className="text-xs text-[#7A87B2]">{claimsData.pending.count} items</p>
+                      </div>
+                    </div>
+
+                    {/* Paid */}
+                    <div className="flex items-center justify-between p-3 bg-[#ECFDF5] rounded-xl group hover:bg-[#D1FAE5] transition-colors cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[#A7F3D0] flex items-center justify-center">
+                          <CheckCircle2 className="w-4 h-4 text-[#059669]" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#065F46]">Paid This Year</p>
+                          <p className="text-xs text-[#10B981]">Reimbursed successfully</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-[#059669]">${claimsData.paid.amount.toLocaleString()}</p>
+                        <p className="text-xs text-[#10B981]">{claimsData.paid.count} claims</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Action */}
+                  <button className="w-full flex items-center justify-center gap-2 bg-[#172DA1] hover:bg-[#122385] text-white px-4 py-3 rounded-xl text-sm font-semibold transition-colors">
+                    <Plus className="w-4 h-4" />
+                    File New Claim
+                  </button>
+                </div>
+              )}
+
+              {/* HSA Investment View */}
+              {activeActivityView === 'hsa' && (
+                <div className="space-y-4">
+                  {/* Balance Summary */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-xs text-[#7A87B2] mb-1">Investment Balance</p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-[#172DA1]">${hsaData.investedBalance.toLocaleString()}</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="flex items-center gap-1.5 text-[#059669]">
+                        <TrendingUp className="w-4 h-4" />
+                        <span className="text-lg font-bold">+{hsaData.ytdReturn}%</span>
+                      </div>
+                      <p className="text-xs text-[#7A87B2]">+${hsaData.ytdGain.toLocaleString()} YTD</p>
+                    </div>
+                  </div>
+
+                  {/* Mini Sparkline Chart */}
+                  <div className="h-20 w-full">
+                    <svg viewBox={`0 0 ${hsaChartWidth} ${hsaChartHeight}`} className="w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="hsaAreaGradientV41" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#059669" stopOpacity="0.3" />
+                          <stop offset="100%" stopColor="#059669" stopOpacity="0.05" />
+                        </linearGradient>
+                      </defs>
+                      <path d={hsaAreaPath} fill="url(#hsaAreaGradientV41)" />
+                      <path d={hsaLinePath} fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+
+                  {/* Balance Breakdown */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 bg-[#F5F7FF] rounded-xl">
+                      <p className="text-xs text-[#7A87B2] mb-1">Invested</p>
+                      <p className="text-lg font-bold text-[#172DA1]">${hsaData.investedBalance.toLocaleString()}</p>
+                    </div>
+                    <div className="p-3 bg-[#F5F7FF] rounded-xl">
+                      <p className="text-xs text-[#7A87B2] mb-1">Cash Available</p>
+                      <p className="text-lg font-bold text-[#172DA1]">${hsaData.cashBalance.toLocaleString()}</p>
+                    </div>
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="flex gap-2">
+                    <button className="flex-1 flex items-center justify-center gap-2 bg-[#172DA1] hover:bg-[#122385] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors">
+                      <TrendingUp className="w-4 h-4" />
+                      Invest More
+                    </button>
+                    <button className="flex-1 flex items-center justify-center gap-2 bg-white border border-[#E1E8FF] hover:bg-[#F5F7FF] text-[#172DA1] px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors">
+                      View Portfolio
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Recent Transactions Card */}

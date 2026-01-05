@@ -180,7 +180,7 @@ const BenefitsDashboardDraft = () => {
                         <div className="relative z-10 flex flex-col justify-between h-full">
                             <div className="flex justify-between items-start">
                                 <div className="w-12 h-8 bg-white/20 rounded-md backdrop-blur-sm border border-white/30"></div>
-                                <span className="font-bold italic text-lg opacity-90">VISA</span>
+                                <span className="font-bold italic text-lg opacity-90">WEX</span>
                             </div>
                             <div>
                                 <p className="text-sm opacity-80 font-medium mb-1">Health Savings Account</p>

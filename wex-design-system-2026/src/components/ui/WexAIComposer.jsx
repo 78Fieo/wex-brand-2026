@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Sparkles, Mic, Paperclip, Send, Command, X, ArrowRight } from "lucide-react";
+import { Sparkles, Mic, Paperclip, Send, X, ArrowRight } from "lucide-react";
 
 /**
  * WexAIComposer - ChatGPT-style AI input with intent detection
@@ -137,36 +137,20 @@ export function WexAIComposer({ mood = "modernist", className = "", hideChips = 
 
   return (
     <div className={`space-y-4 ${className}`}>
-      {/* Starter chips - hidden when parent provides its own suggestions */}
-      {!hideChips && (
-        <div className={`flex flex-wrap gap-2 ${isConcierge ? "justify-center" : "justify-start"}`}>
-          {chips.map((prompt) => (
-            <button
-              key={prompt}
-              onClick={() => handleChipClick(prompt)}
-              className="px-4 py-2 rounded-full bg-[#F5F7FF] border border-[#E1E8FF] text-sm text-[#5D688C] hover:bg-[#EDF1FF] hover:border-[#1C6EFF]/40 hover:text-[#172DA1] transition-all duration-200"
-            >
-              {prompt}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Composer */}
+      {/* Composer with integrated chips - Gemini style */}
       <div className="relative">
         {/* Subtle glow */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1C6EFF]/10 via-[#7C3AED]/5 to-[#1C6EFF]/10 blur-2xl rounded-3xl opacity-60" />
         
         <div className="relative bg-white border border-[#E1E8FF] rounded-3xl shadow-lg shadow-[#172DA1]/5 overflow-hidden">
-          <div className="flex items-center gap-3 p-3 md:p-4">
-            <div className="pl-2">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#EDF1FF] to-[#F5F7FF] flex items-center justify-center">
-                <Sparkles size={16} className="text-[#1C6EFF]" />
+          {/* Input row - with distinct input field styling */}
+          <div className="p-3 md:p-4">
+            <div className="flex items-center gap-3 bg-[#F8FAFF] border border-[#E1E8FF] rounded-2xl px-3 py-2">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#EDF1FF] to-white flex items-center justify-center flex-shrink-0">
+                <Sparkles size={14} className="text-[#1C6EFF]" />
               </div>
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-3">
+              
+              <div className="flex-1 min-w-0">
                 <input
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
@@ -177,55 +161,69 @@ export function WexAIComposer({ mood = "modernist", className = "", hideChips = 
                     }
                   }}
                   placeholder="Ask about claims, balances, cards, coverage…"
-                  className="w-full py-2 bg-transparent text-[#172DA1] placeholder:text-[#7A87B2] focus:outline-none text-base"
+                  className="w-full py-1.5 bg-transparent text-[#172DA1] placeholder:text-[#9AA3C2] focus:outline-none text-base"
                   aria-label="Ask WEX"
                 />
+
+                {/* Intent preview */}
+                {value.trim().length > 2 && (
+                  <div className="text-[11px] text-[#7A87B2] mt-0.5 flex items-center gap-1 animate-in fade-in duration-200">
+                    <ArrowRight size={10} />
+                    <span className="font-medium text-[#5D688C]">{intentLabel}</span>
+                  </div>
+                )}
               </div>
 
-              {/* Intent preview */}
-              {value.trim().length > 2 && (
-                <div className="text-[11px] text-[#7A87B2] mt-1 flex items-center gap-1 animate-in fade-in duration-200">
-                  <ArrowRight size={10} />
-                  <span className="font-medium text-[#5D688C]">{intentLabel}</span>
-                </div>
-              )}
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex items-center gap-1 md:gap-2">
-              <button 
-                className="w-9 h-9 rounded-xl hover:bg-[#F5F7FF] flex items-center justify-center transition-colors" 
-                aria-label="Attach receipt"
-                title="Attach receipt"
-              >
-                <Paperclip size={16} className="text-[#7A87B2]" />
-              </button>
-              <button 
-                className="w-9 h-9 rounded-xl hover:bg-[#F5F7FF] flex items-center justify-center transition-colors" 
-                aria-label="Voice input"
-                title="Voice input"
-              >
-                <Mic size={16} className="text-[#7A87B2]" />
-              </button>
-              <button
-                onClick={() => submit(value)}
-                disabled={!value.trim()}
-                className="bg-gradient-to-br from-[#2E0055] via-[#172DA1] to-[#C8102E] text-white px-4 md:px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 hover:shadow-lg hover:shadow-[#C8102E]/30 transition-all duration-200 flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                <Send size={14} />
-                <span className="hidden md:inline">Ask</span>
-              </button>
+              {/* Action buttons */}
+              <div className="flex items-center gap-1">
+                <button 
+                  className="w-8 h-8 rounded-xl hover:bg-white/80 flex items-center justify-center transition-colors" 
+                  aria-label="Attach receipt"
+                  title="Attach receipt"
+                >
+                  <Paperclip size={15} className="text-[#9AA3C2]" />
+                </button>
+                <button 
+                  className="w-8 h-8 rounded-xl hover:bg-white/80 flex items-center justify-center transition-colors" 
+                  aria-label="Voice input"
+                  title="Voice input"
+                >
+                  <Mic size={15} className="text-[#9AA3C2]" />
+                </button>
+                <button
+                  onClick={() => submit(value)}
+                  disabled={!value.trim()}
+                  className="bg-gradient-to-br from-[#2E0055] via-[#172DA1] to-[#C8102E] text-white px-4 py-2 rounded-xl font-bold text-sm hover:opacity-90 hover:shadow-lg hover:shadow-[#C8102E]/30 transition-all duration-200 flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed ml-1"
+                >
+                  <Send size={13} />
+                  <span className="hidden md:inline">Ask</span>
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Trust line + keyboard shortcut */}
-          <div className="px-5 pb-3 flex items-center justify-between border-t border-[#F5F7FF]">
-            <span className="text-[10px] font-medium text-[#7A87B2]">
+          {/* Integrated suggestion chips - Gemini style (inside the card, hides when typing) */}
+          {!hideChips && !value.trim() && (
+            <div className="px-4 md:px-5 pb-4">
+              <div className={`flex flex-wrap gap-2 ${isConcierge ? "justify-center" : "justify-start"}`}>
+                {chips.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => handleChipClick(prompt)}
+                    className="px-3 py-1.5 rounded-full bg-[#F5F7FF] border border-[#E1E8FF] text-xs text-[#5D688C] hover:bg-[#EDF1FF] hover:border-[#1C6EFF]/40 hover:text-[#172DA1] transition-all duration-200"
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Trust line */}
+          <div className="px-5 pb-3 border-t border-[#F5F7FF]">
+            <span className="text-[10px] font-medium text-[#9AA3C2]">
               Private • Secure • You're in control
             </span>
-            <div className="hidden md:flex items-center gap-1 text-[10px] font-bold text-[#7A87B2] bg-[#F5F7FF] px-2.5 py-1.5 rounded-lg border border-[#E1E8FF]">
-              <Command size={10} /> K
-            </div>
           </div>
         </div>
       </div>

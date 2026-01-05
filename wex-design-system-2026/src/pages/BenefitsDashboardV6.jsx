@@ -1,33 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Bell, Settings, ChevronRight, ChevronDown,
-  TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight,
-  Heart, Briefcase, Car, Bus, Wallet, Eye, EyeOff,
-  Receipt, CreditCard, Clock, FileText, Plus,
-  Sparkles, Search, MoreHorizontal, ExternalLink
+  TrendingUp, TrendingDown, ArrowUpRight,
+  Heart, Briefcase, Bus, Wallet, Eye, EyeOff,
+  Receipt, CreditCard, Plus,
+  MoreHorizontal, ExternalLink, FileText
 } from 'lucide-react';
 import { 
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
   BarChart, Bar, Cell
 } from 'recharts';
-import wexLogoRed from '../assets/wex_logo_red.svg';
 
 /**
- * BenefitsDashboardV6 - Segment-Inspired Benefits Dashboard
- * Clean, data-dense layout with portfolio-style account cards
+ * BenefitsDashboardV6 - WEX Design System Aligned
+ * "Segment-Inspired" layout with official WEX tokens.
  */
 const BenefitsDashboardV6 = () => {
   const [showBalances, setShowBalances] = useState(true);
   const [timeRange, setTimeRange] = useState('6m');
   const [hoveredCard, setHoveredCard] = useState(null);
-
-  const userName = "Sarah";
-  const date = new Date().toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    month: 'long', 
-    day: 'numeric'
-  });
 
   // Chart data for total value trend
   const trendData = [
@@ -41,68 +33,74 @@ const BenefitsDashboardV6 = () => {
 
   // HSA Investment performance data (bar chart)
   const investmentData = [
-    { month: 'Oct', value: 180, positive: true },
-    { month: 'Nov', value: 220, positive: true },
-    { month: 'Dec', value: 280, positive: true },
-    { month: 'Jan', value: 150, positive: true },
-    { month: 'Feb', value: 310, positive: true },
-    { month: 'Mar', value: 240, positive: true },
+    { month: 'Oct', value: 180 },
+    { month: 'Nov', value: 220 },
+    { month: 'Dec', value: 280 },
+    { month: 'Jan', value: 150 },
+    { month: 'Feb', value: 310 },
+    { month: 'Mar', value: 240 },
   ];
 
-  // Account cards with distinct color themes
+  // Account cards with WEX Brand Themes
   const accounts = [
     { 
       id: 'fsa',
       name: 'FSA', 
       fullName: 'Flexible Spending',
-      description: 'Use-it-or-lose-it healthcare funds',
+      description: 'Use-it-or-lose-it funds',
       balance: 1200.00,
       trend: -20.32,
       trendLabel: 'This Week',
       icon: Briefcase,
       theme: {
-        bg: 'bg-gradient-to-br from-amber-300 via-yellow-300 to-amber-400',
+        // WEX Yellow/Amber Theme
+        bg: 'bg-gradient-to-br from-amber-50 to-orange-50',
         text: 'text-amber-900',
-        subtext: 'text-amber-800/70',
-        border: 'border-amber-400/30',
-        trendBg: 'bg-amber-900/10',
-        trendText: 'text-amber-900',
+        subtext: 'text-amber-700/70',
+        border: 'border-amber-200/60',
+        trendBg: 'bg-amber-100',
+        trendText: 'text-amber-800',
+        iconBg: 'bg-amber-100 text-amber-600'
       }
     },
     { 
       id: 'hsa',
       name: 'HSA', 
       fullName: 'Health Savings',
-      description: 'Tax-advantaged savings account',
+      description: 'Tax-advantaged savings',
       balance: 4847.12,
       trend: -6.34,
       trendLabel: 'This Week',
       icon: Heart,
       theme: {
+        // WEX Red/Primary Theme
         bg: 'bg-white',
-        text: 'text-slate-900',
-        subtext: 'text-slate-500',
-        border: 'border-slate-200',
-        trendBg: 'bg-slate-100',
-        trendText: 'text-slate-600',
+        text: 'text-wex-blue-main',
+        subtext: 'text-[#5D688C]',
+        border: 'border-[#E1E8FF]',
+        trendBg: 'bg-[#EDF1FF]',
+        trendText: 'text-wex-blue-main',
+        iconBg: 'bg-red-50 text-wex-red'
       }
     },
     { 
       id: 'commuter',
       name: 'Commuter', 
       fullName: 'Transit Benefits',
-      description: 'Pre-tax commuter benefits',
+      description: 'Pre-tax transit funds',
       balance: 240.00,
       trend: 0.45,
       trendLabel: 'This Week',
       icon: Bus,
       theme: {
-        bg: 'bg-gradient-to-br from-fuchsia-200 via-pink-200 to-purple-200',
-        text: 'text-purple-900',
-        subtext: 'text-purple-800/70',
-        border: 'border-purple-300/30',
-        trendBg: 'bg-purple-900/10',
-        trendText: 'text-purple-900',
+        // WEX Blue Accent Theme
+        bg: 'bg-gradient-to-br from-[#F5F8FF] to-[#EDF1FF]',
+        text: 'text-blue-900',
+        subtext: 'text-blue-700/70',
+        border: 'border-blue-200/60',
+        trendBg: 'bg-blue-100',
+        trendText: 'text-blue-800',
+        iconBg: 'bg-blue-100 text-wex-blue-accent'
       }
     },
   ];
@@ -168,11 +166,11 @@ const BenefitsDashboardV6 = () => {
   const gainPercentage = 20;
 
   // Custom tooltip for charts
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-900 text-white px-3 py-2 rounded-lg text-sm shadow-xl">
-          <p className="font-semibold">${payload[0].value.toLocaleString()}</p>
+        <div className="bg-wex-blue-main text-white px-3 py-2 rounded-lg text-sm shadow-xl border border-wex-blue-dark">
+          <p className="font-semibold font-mono">${payload[0].value.toLocaleString()}</p>
         </div>
       );
     }
@@ -184,7 +182,7 @@ const BenefitsDashboardV6 = () => {
     <svg className="w-20 h-8" viewBox="0 0 80 32">
       <polyline
         fill="none"
-        stroke={positive ? '#10b981' : '#ef4444'}
+        stroke={positive ? '#00C48C' : '#C8102E'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -194,19 +192,20 @@ const BenefitsDashboardV6 = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-50 to-white font-sans">
+    <div className="min-h-screen bg-[#FDFDFF] font-sans selection:bg-wex-red/10 selection:text-wex-red">
       
       {/* Navigation Header */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E1E8FF]">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             {/* Left: Logo & Nav */}
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-10">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">W</span>
+                {/* WEX Logo mark (Red Square) */}
+                <div className="w-8 h-8 bg-wex-red flex items-center justify-center">
+                   <span className="text-white font-bold text-lg leading-none">W</span>
                 </div>
-                <span className="font-bold text-slate-900 text-lg tracking-tight">Benefits</span>
+                <span className="font-bold text-wex-blue-main text-xl tracking-tight">Benefits</span>
               </div>
               
               <div className="hidden md:flex items-center gap-1">
@@ -215,8 +214,8 @@ const BenefitsDashboardV6 = () => {
                     key={item}
                     className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                       i === 0 
-                        ? 'text-slate-900 bg-slate-100' 
-                        : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                        ? 'text-wex-blue-main bg-[#EDF1FF]' 
+                        : 'text-[#5D688C] hover:text-wex-blue-main hover:bg-[#F5F8FF]'
                     }`}
                   >
                     {item}
@@ -233,22 +232,22 @@ const BenefitsDashboardV6 = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors"
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-wex-red text-white text-sm font-semibold rounded-lg hover:bg-[#A00D25] shadow-lg shadow-wex-red/20 transition-all"
               >
                 <Plus size={16} />
                 File Claim
               </motion.button>
               
-              <button className="relative w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors">
-                <Bell size={18} className="text-slate-600" />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full" />
+              <button className="relative w-10 h-10 rounded-lg border border-[#E1E8FF] bg-white flex items-center justify-center hover:bg-[#F5F8FF] transition-colors text-[#5D688C] hover:text-wex-blue-main">
+                <Bell size={18} />
+                <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-wex-red rounded-full ring-2 ring-white" />
               </button>
               
-              <button className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors">
-                <Settings size={18} className="text-slate-600" />
+              <button className="w-10 h-10 rounded-lg border border-[#E1E8FF] bg-white flex items-center justify-center hover:bg-[#F5F8FF] transition-colors text-[#5D688C] hover:text-wex-blue-main">
+                <Settings size={18} />
               </button>
               
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center cursor-pointer">
+              <div className="w-10 h-10 rounded-full bg-wex-blue-main flex items-center justify-center cursor-pointer ring-2 ring-offset-2 ring-transparent hover:ring-[#E1E8FF] transition-all">
                 <span className="text-sm font-bold text-white">SJ</span>
               </div>
             </div>
@@ -263,10 +262,10 @@ const BenefitsDashboardV6 = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-6"
+          className="flex items-center justify-between mb-8"
         >
-          <h1 className="text-2xl font-bold text-slate-900">Overview</h1>
-          <button className="text-sm font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-colors">
+          <h1 className="text-2xl font-bold text-wex-blue-main">Overview</h1>
+          <button className="text-sm font-medium text-wex-blue-accent hover:text-blue-700 flex items-center gap-1 transition-colors">
             View Details
             <ExternalLink size={14} />
           </button>
@@ -277,39 +276,39 @@ const BenefitsDashboardV6 = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12"
         >
           {/* Main Total Value Card (spans 2 columns) */}
-          <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+          <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E1E8FF] p-8 shadow-wex-card hover:shadow-wex-card-hover transition-shadow">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
               <div>
-                <p className="text-sm text-slate-500 mb-2">Total Benefits Value</p>
+                <p className="text-sm font-medium text-[#5D688C] mb-2 uppercase tracking-wide">Total Benefits Value</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-slate-900 tracking-tight">
+                  <span className="text-5xl font-bold text-wex-blue-main tracking-tight font-display">
                     {showBalances ? '$' + Math.floor(totalBalance).toLocaleString() : '•••••'}
                   </span>
-                  <span className="text-2xl font-bold text-slate-400">
+                  <span className="text-2xl font-bold text-[#B1C0EE]">
                     {showBalances ? '.' + (totalBalance % 1).toFixed(2).slice(2) : ''}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 mt-3">
-                  <span className="text-sm text-emerald-600">
-                    You gained <span className="font-semibold text-emerald-600">${totalGain.toLocaleString()}</span> last 6 months.
+                <div className="flex items-center gap-3 mt-4">
+                  <span className="text-sm text-[#00C48C] font-medium bg-[#00C48C]/10 px-2 py-0.5 rounded">
+                    +${totalGain.toLocaleString()}
                   </span>
-                  <span className="text-sm text-slate-400">That's the best results in last 2 years.</span>
+                  <span className="text-sm text-[#7A87B2]">Last 6 months gain</span>
                 </div>
               </div>
               
               {/* Time Range Selector */}
-              <div className="flex items-center bg-slate-100 rounded-xl p-1">
+              <div className="flex items-center bg-[#F5F8FF] rounded-lg p-1 border border-[#E1E8FF]">
                 {['24h', '7d', '6m', '1y', 'Max'].map((range) => (
                   <button
                     key={range}
                     onClick={() => setTimeRange(range)}
-                    className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
                       timeRange === range
-                        ? 'bg-slate-900 text-white shadow-sm'
-                        : 'text-slate-500 hover:text-slate-900'
+                        ? 'bg-white text-wex-blue-main shadow-sm border border-[#E1E8FF]'
+                        : 'text-[#7A87B2] hover:text-wex-blue-main'
                     }`}
                   >
                     {range}
@@ -319,43 +318,46 @@ const BenefitsDashboardV6 = () => {
             </div>
 
             {/* Trend Badge */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 text-sm font-semibold rounded-full border border-emerald-200">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F0FDF4] text-[#15803d] text-sm font-semibold rounded-full border border-[#DCFCE7]">
                 <TrendingUp size={14} />
-                Increased by {gainPercentage}%
+                Portfolio up {gainPercentage}%
               </span>
             </div>
 
-            {/* Area Chart */}
-            <div className="h-48 -mx-2">
+            {/* Area Chart - Updated to WEX Red */}
+            <div className="h-56 -mx-2">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={trendData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#ec4899" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#ec4899" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#C8102E" stopOpacity={0.1}/>
+                      <stop offset="95%" stopColor="#C8102E" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
                   <XAxis 
                     dataKey="month" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#94a3b8', fontSize: 12 }}
+                    tick={{ fill: '#7A87B2', fontSize: 12 }}
+                    dy={10}
                   />
                   <YAxis 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#94a3b8', fontSize: 12 }}
+                    tick={{ fill: '#7A87B2', fontSize: 12 }}
                     tickFormatter={(value) => `${value/1000}k`}
+                    dx={-10}
                   />
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#E1E8FF', strokeWidth: 2 }} />
                   <Area 
                     type="monotone" 
                     dataKey="value" 
-                    stroke="#ec4899" 
-                    strokeWidth={2.5}
+                    stroke="#C8102E" 
+                    strokeWidth={3}
                     fillOpacity={1} 
                     fill="url(#colorValue)" 
+                    activeDot={{ r: 6, strokeWidth: 0, fill: '#C8102E' }}
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -363,39 +365,43 @@ const BenefitsDashboardV6 = () => {
           </div>
 
           {/* HSA Investment Card */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm text-slate-500">HSA Investment Returns</p>
-              <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded-md">Last 6m</span>
+          <div className="bg-white rounded-2xl border border-[#E1E8FF] p-6 shadow-wex-card flex flex-col h-full">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-5">
+              <p className="text-sm font-semibold text-[#5D688C] uppercase tracking-wide">HSA Investments</p>
+              <span className="text-xs font-semibold text-wex-blue-main bg-[#EDF1FF] px-2.5 py-1 rounded-md">YTD</span>
             </div>
             
-            <div className="mb-4">
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-slate-900">$1,234</span>
-                <span className="text-xl font-bold text-slate-400">.40</span>
+            {/* Value */}
+            <div className="mb-2">
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-4xl font-bold text-wex-blue-main tracking-tight">$1,234</span>
+                <span className="text-xl font-bold text-[#B1C0EE]">.40</span>
               </div>
-              <p className="text-sm text-slate-400 mt-1">Oct 2024 - April 2025</p>
+              <p className="text-xs text-[#7A87B2] mt-1.5 font-medium">Outperforming benchmark by 2.1%</p>
             </div>
 
-            {/* Bar Chart */}
-            <div className="h-32 mt-4">
+            {/* Bar Chart - Fills remaining space */}
+            <div className="flex-1 min-h-0 mt-4">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={investmentData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                <BarChart data={investmentData} margin={{ top: 8, right: 0, left: 0, bottom: 0 }}>
                   <XAxis 
                     dataKey="month" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#94a3b8', fontSize: 10 }}
+                    tick={{ fill: '#7A87B2', fontSize: 11, fontWeight: 500 }}
+                    dy={8}
                   />
                   <Bar 
                     dataKey="value" 
-                    radius={[4, 4, 0, 0]}
+                    radius={[6, 6, 0, 0]}
+                    maxBarSize={48}
                   >
                     {investmentData.map((entry, index) => (
                       <Cell 
                         key={`cell-${index}`} 
-                        fill="#fbbf24"
-                        opacity={0.9}
+                        fill="#FFBC00"
+                        opacity={index === investmentData.length - 1 ? 1 : 0.65}
                       />
                     ))}
                   </Bar>
@@ -403,11 +409,12 @@ const BenefitsDashboardV6 = () => {
               </ResponsiveContainer>
             </div>
 
-            {/* Average badge */}
-            <div className="flex items-center gap-2 mt-2">
-              <span className="inline-flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-md">
+            {/* Footer badge */}
+            <div className="flex items-center gap-2.5 mt-4 pt-4 border-t border-[#E1E8FF]">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#F0FDF4] text-[#15803d] text-xs font-semibold rounded-md">
                 Avg +8.12%
               </span>
+              <span className="text-xs text-[#7A87B2] font-medium">Annualized Return</span>
             </div>
           </div>
         </motion.div>
@@ -419,24 +426,20 @@ const BenefitsDashboardV6 = () => {
           transition={{ delay: 0.2 }}
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">Your Accounts</h2>
+            <h2 className="text-2xl font-bold text-wex-blue-main">Your Accounts</h2>
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => setShowBalances(!showBalances)}
-                className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900 transition-colors"
+                className="flex items-center gap-2 text-sm text-[#5D688C] hover:text-wex-blue-main transition-colors"
               >
                 {showBalances ? <Eye size={16} /> : <EyeOff size={16} />}
                 {showBalances ? 'Hide' : 'Show'}
-              </button>
-              <button className="text-sm font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-colors">
-                View More
-                <ExternalLink size={14} />
               </button>
             </div>
           </div>
 
           {/* Account Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {accounts.map((account, index) => {
               const Icon = account.icon;
               const isPositive = account.trend > 0;
@@ -450,19 +453,22 @@ const BenefitsDashboardV6 = () => {
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
                   onHoverStart={() => setHoveredCard(account.id)}
                   onHoverEnd={() => setHoveredCard(null)}
-                  className={`relative p-6 rounded-3xl border ${account.theme.border} ${account.theme.bg} cursor-pointer transition-shadow hover:shadow-xl group overflow-hidden`}
+                  className={`relative p-6 rounded-2xl border ${account.theme.border} ${account.theme.bg} cursor-pointer shadow-sm hover:shadow-wex-card-hover transition-all group overflow-hidden`}
                 >
                   {/* Card Header */}
-                  <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-start justify-between mb-6">
                     <div>
                       <h3 className={`text-lg font-bold ${account.theme.text}`}>{account.name}</h3>
                       <p className={`text-sm ${account.theme.subtext}`}>{account.description}</p>
                     </div>
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${account.theme.iconBg}`}>
+                      <Icon size={20} />
+                    </div>
                   </div>
 
                   {/* Balance */}
-                  <div className="mb-4">
-                    <span className={`text-3xl font-bold ${account.theme.text}`}>
+                  <div className="mb-6">
+                    <span className={`text-3xl font-bold tracking-tight ${account.theme.text} font-display`}>
                       {showBalances 
                         ? '$' + account.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                         : '•••••'
@@ -473,18 +479,14 @@ const BenefitsDashboardV6 = () => {
                   {/* Trend */}
                   <div className="flex items-center gap-2">
                     <span className={`inline-flex items-center gap-1 text-sm font-medium ${account.theme.trendText} ${account.theme.trendBg} px-2 py-1 rounded-md`}>
-                      {isPositive ? (
-                        <TrendingUp size={14} />
-                      ) : (
-                        <TrendingDown size={14} />
-                      )}
+                      {isPositive ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
                       {Math.abs(account.trend).toFixed(2)}%
                     </span>
                     <span className={`text-sm ${account.theme.subtext}`}>{account.trendLabel}</span>
                   </div>
 
                   {/* Hover Arrow */}
-                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
                     <ArrowUpRight size={20} className={account.theme.text} />
                   </div>
                 </motion.div>
@@ -501,44 +503,45 @@ const BenefitsDashboardV6 = () => {
           className="grid grid-cols-1 lg:grid-cols-3 gap-6"
         >
           {/* Recent Transactions Table */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
+          <div className="bg-white rounded-2xl border border-[#E1E8FF] p-6 shadow-wex-card">
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
-                <TrendingUp size={18} className="text-slate-400" />
-                <h3 className="text-lg font-bold text-slate-900">Recent Activity</h3>
+                <h3 className="text-lg font-bold text-wex-blue-main">Recent Activity</h3>
               </div>
-              <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded-md">Last 7d</span>
+              <span className="text-xs font-medium text-[#5D688C] bg-[#EDF1FF] px-2 py-1 rounded-md">Last 7d</span>
             </div>
 
             {/* Table Header */}
-            <div className="grid grid-cols-4 gap-4 text-xs font-medium text-slate-400 uppercase tracking-wider pb-3 border-b border-slate-100">
-              <span>Merchant</span>
-              <span className="text-center">Trend</span>
-              <span className="text-center">Change %</span>
-              <span className="text-right">Amount</span>
+            <div className="grid grid-cols-4 gap-4 text-xs font-semibold text-[#7A87B2] uppercase tracking-wider pb-3 border-b border-[#F5F8FF]">
+              <span className="col-span-1">Merchant</span>
+              <span className="text-center col-span-1">Trend</span>
+              <span className="text-center col-span-1">Change</span>
+              <span className="text-right col-span-1">Amount</span>
             </div>
 
             {/* Table Rows */}
-            <div className="divide-y divide-slate-50">
+            <div className="divide-y divide-[#F5F8FF]">
               {transactions.map((tx) => (
-                <div key={tx.id} className="grid grid-cols-4 gap-4 py-4 items-center hover:bg-slate-50 -mx-2 px-2 rounded-lg cursor-pointer transition-colors">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">{tx.icon}</span>
-                    <div>
-                      <p className="text-sm font-medium text-slate-900 truncate">{tx.merchant.split(' ')[0]}</p>
-                      <p className="text-xs text-slate-400">{tx.type}</p>
+                <div key={tx.id} className="grid grid-cols-4 gap-4 py-4 items-center hover:bg-[#FDFDFF] group cursor-pointer transition-colors">
+                  <div className="col-span-1 flex items-center gap-3 overflow-hidden">
+                    <div className="w-8 h-8 rounded-full bg-[#F5F8FF] flex items-center justify-center text-sm shrink-0">
+                       {tx.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-wex-blue-main truncate">{tx.merchant.split(' ')[0]}</p>
+                      <p className="text-xs text-[#7A87B2]">{tx.type}</p>
                     </div>
                   </div>
-                  <div className="flex justify-center">
+                  <div className="col-span-1 flex justify-center">
                     <MiniSparkline data={tx.sparkline} positive={tx.change > 0} />
                   </div>
-                  <div className="text-center">
-                    <span className={`text-sm font-medium ${tx.change > 0 ? 'text-emerald-600' : 'text-rose-500'}`}>
+                  <div className="col-span-1 text-center">
+                    <span className={`text-xs font-semibold ${tx.change > 0 ? 'text-[#00C48C]' : 'text-wex-red'}`}>
                       {tx.change > 0 ? '+' : ''}{tx.change.toFixed(2)}%
                     </span>
                   </div>
-                  <div className="text-right">
-                    <span className="text-sm font-semibold text-slate-900">
+                  <div className="col-span-1 text-right">
+                    <span className="text-sm font-bold text-wex-blue-main font-mono">
                       ${tx.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </span>
                   </div>
@@ -548,50 +551,51 @@ const BenefitsDashboardV6 = () => {
           </div>
 
           {/* Pending Claims Table */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
+          <div className="bg-white rounded-2xl border border-[#E1E8FF] p-6 shadow-wex-card">
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
-                <FileText size={18} className="text-slate-400" />
-                <h3 className="text-lg font-bold text-slate-900">Pending Claims</h3>
+                <h3 className="text-lg font-bold text-wex-blue-main">Pending Claims</h3>
               </div>
-              <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-200">2 Action</span>
+              <span className="text-xs font-medium text-wex-yellow bg-[#FFF9E6] px-2 py-1 rounded-md border border-wex-yellow/20">2 Action</span>
             </div>
 
             {/* Table Header */}
-            <div className="grid grid-cols-4 gap-4 text-xs font-medium text-slate-400 uppercase tracking-wider pb-3 border-b border-slate-100">
-              <span>Claim</span>
-              <span className="text-center">Status</span>
-              <span className="text-center">Change</span>
-              <span className="text-right">Amount</span>
+            <div className="grid grid-cols-4 gap-4 text-xs font-semibold text-[#7A87B2] uppercase tracking-wider pb-3 border-b border-[#F5F8FF]">
+              <span className="col-span-1">Claim</span>
+              <span className="text-center col-span-1">Status</span>
+              <span className="text-center col-span-1">Impact</span>
+              <span className="text-right col-span-1">Value</span>
             </div>
 
             {/* Table Rows */}
-            <div className="divide-y divide-slate-50">
+            <div className="divide-y divide-[#F5F8FF]">
               {pendingClaims.map((claim) => (
-                <div key={claim.id} className="grid grid-cols-4 gap-4 py-4 items-center hover:bg-slate-50 -mx-2 px-2 rounded-lg cursor-pointer transition-colors">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">{claim.icon}</span>
-                    <div>
-                      <p className="text-sm font-medium text-slate-900 truncate">{claim.merchant.split(' ')[0]}</p>
-                      <p className="text-xs text-slate-400">{claim.type}</p>
+                <div key={claim.id} className="grid grid-cols-4 gap-4 py-4 items-center hover:bg-[#FDFDFF] cursor-pointer transition-colors">
+                  <div className="col-span-1 flex items-center gap-3 overflow-hidden">
+                     <div className="w-8 h-8 rounded-full bg-[#F5F8FF] flex items-center justify-center text-sm shrink-0">
+                       {claim.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-wex-blue-main truncate">{claim.merchant.split(' ')[0]}</p>
+                      <p className="text-xs text-[#7A87B2]">{claim.type}</p>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <span className={`text-xs font-semibold px-2 py-1 rounded-md ${
+                  <div className="col-span-1 text-center">
+                    <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-full ${
                       claim.status === 'Action Needed' 
-                        ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-blue-50 text-blue-600 border border-blue-200'
+                        ? 'bg-red-50 text-wex-red border border-red-100'
+                        : 'bg-blue-50 text-wex-blue-accent border border-blue-100'
                     }`}>
-                      {claim.status.split(' ')[0]}
+                      {claim.status === 'Action Needed' ? 'Action' : 'Review'}
                     </span>
                   </div>
-                  <div className="text-center">
-                    <span className={`text-sm font-medium ${claim.change > 0 ? 'text-emerald-600' : 'text-rose-500'}`}>
+                  <div className="col-span-1 text-center">
+                     <span className={`text-xs font-semibold ${claim.change > 0 ? 'text-[#00C48C]' : 'text-wex-red'}`}>
                       {claim.change > 0 ? '+' : ''}{claim.change.toFixed(2)}%
                     </span>
                   </div>
-                  <div className="text-right">
-                    <span className="text-sm font-semibold text-slate-900">
+                  <div className="col-span-1 text-right">
+                    <span className="text-sm font-bold text-wex-blue-main font-mono">
                       ${claim.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </span>
                   </div>
@@ -600,57 +604,57 @@ const BenefitsDashboardV6 = () => {
             </div>
 
             {/* Action Button */}
-            <button className="w-full mt-4 py-3 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+            <button className="w-full mt-6 py-3 bg-wex-blue-main text-white text-sm font-semibold rounded-lg hover:bg-wex-blue-dark shadow-md transition-all flex items-center justify-center gap-2">
               <Receipt size={16} />
               Upload Receipt
             </button>
           </div>
 
           {/* Quick Actions / Assets Overview */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-[#E1E8FF] p-6 shadow-wex-card">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-slate-900">Quick Actions</h3>
-              <button className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors">
-                <MoreHorizontal size={18} className="text-slate-400" />
+              <h3 className="text-lg font-bold text-wex-blue-main">Quick Actions</h3>
+              <button className="w-8 h-8 rounded-lg hover:bg-[#F5F8FF] flex items-center justify-center transition-colors">
+                <MoreHorizontal size={18} className="text-[#5D688C]" />
               </button>
             </div>
 
             {/* Total Overview Card */}
-            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-5 mb-6 border border-slate-200">
+            <div className="bg-gradient-to-br from-[#172DA1] to-[#122385] rounded-xl p-5 mb-6 text-white shadow-lg shadow-blue-900/20">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
                   <Wallet size={24} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-slate-500">Total Available</p>
-                  <p className="text-2xl font-bold text-slate-900">
+                  <p className="text-sm text-blue-200">Total Available Funds</p>
+                  <p className="text-2xl font-bold font-display tracking-tight">
                     ${showBalances ? totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 }) : '•••••'}
                   </p>
                 </div>
-                <ChevronRight size={20} className="text-slate-300" />
+                <ChevronRight size={20} className="text-blue-300" />
               </div>
             </div>
 
             {/* Action Items */}
             <div className="space-y-3">
               {[
-                { icon: CreditCard, label: 'View Card', desc: 'Manage your benefits card', color: 'from-blue-500 to-indigo-500' },
-                { icon: TrendingUp, label: 'Invest HSA', desc: 'Grow your savings', color: 'from-emerald-500 to-teal-500' },
-                { icon: Plus, label: 'Contribute', desc: 'Add funds to HSA', color: 'from-amber-500 to-orange-500' },
+                { icon: CreditCard, label: 'View Card Details', desc: 'Manage your benefits card', color: 'bg-wex-blue-accent', textColor: 'text-wex-blue-accent' },
+                { icon: TrendingUp, label: 'Manage Investments', desc: 'HSA performance & allocation', color: 'bg-wex-yellow', textColor: 'text-yellow-700' },
+                { icon: Plus, label: 'One-Time Contribution', desc: 'Add funds to your HSA', color: 'bg-[#00C48C]', textColor: 'text-emerald-700' },
               ].map((action, i) => (
                 <motion.button
                   key={action.label}
                   whileHover={{ x: 4 }}
-                  className="w-full flex items-center gap-4 p-4 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors group text-left"
+                  className="w-full flex items-center gap-4 p-3 hover:bg-[#F5F8FF] rounded-xl transition-colors group text-left border border-transparent hover:border-[#E1E8FF]"
                 >
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center`}>
-                    <action.icon size={18} className="text-white" />
+                  <div className={`w-10 h-10 rounded-lg ${action.color} bg-opacity-10 flex items-center justify-center`}>
+                    <action.icon size={18} className={action.textColor} />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-slate-900">{action.label}</p>
-                    <p className="text-xs text-slate-400">{action.desc}</p>
+                    <p className="text-sm font-semibold text-wex-blue-main">{action.label}</p>
+                    <p className="text-xs text-[#7A87B2]">{action.desc}</p>
                   </div>
-                  <ChevronRight size={16} className="text-slate-300 group-hover:text-slate-500 transition-colors" />
+                  <ChevronRight size={16} className="text-[#B1C0EE] group-hover:text-wex-blue-main transition-colors" />
                 </motion.button>
               ))}
             </div>
@@ -663,4 +667,3 @@ const BenefitsDashboardV6 = () => {
 };
 
 export default BenefitsDashboardV6;
-

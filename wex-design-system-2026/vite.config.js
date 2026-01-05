@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
-    strictPort: true,  // Fail if port is in use instead of auto-incrementing
+    port: 3000,
+    strictPort: false,  // Allow port auto-incrementing if port is in use
   },
 })

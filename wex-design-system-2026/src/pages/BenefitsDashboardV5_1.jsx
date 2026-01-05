@@ -1,13 +1,31 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { AIGlowBorder } from '@/components/ui/moving-border';
 import { 
   Sparkles, Search, Bell, User, Command, ChevronRight, 
-  CheckCircle2, PlusCircle, CreditCard, TrendingUp, History, 
-  AlertCircle, Wallet, Activity, ChevronDown, ChevronUp,
-  LayoutGrid, List
+  CheckCircle2, History, AlertCircle, Activity, Zap, ArrowRight
 } from 'lucide-react';
 import { WexAIComposer } from '@/components/ui/WexAIComposer';
 import wexLogoRed from '../assets/wex_logo_red.svg';
+
+// Simple fade animation variants
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.15 }
+  }
+};
+
+const staggerItem = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] } }
+};
 
 /**
  * BenefitsDashboardV5_1 - AI-Forward Benefits Dashboard (Idea 1)
@@ -16,7 +34,6 @@ import wexLogoRed from '../assets/wex_logo_red.svg';
 const BenefitsDashboardV5_1 = () => {
   const [mood, setMood] = useState('modernist');
   const [filed, setFiled] = useState(false);
-  const [viewMode, setViewMode] = useState('chips'); // 'chips' | 'tiles'
 
   // Constants
   const date = new Date().toLocaleDateString('en-US', { 
@@ -44,18 +61,6 @@ const BenefitsDashboardV5_1 = () => {
     { id: 1, merchant: 'Walgreens', amount: '$42.50', status: 'Approved', type: 'FSA', date: 'Today' },
     { id: 2, merchant: 'Dr. Miller (Dental)', amount: '$340.00', status: 'Needs Receipt', type: 'FSA', date: 'Yesterday', alert: true },
     { id: 3, merchant: 'Vanguard Invest', amount: '$500.00', status: 'Completed', type: 'HSA', date: 'Dec 14' },
-  ];
-
-  // Combined Suggestions (Actions + Questions)
-  const suggestions = [
-    { id: 'file', label: 'File a Claim', type: 'action', icon: <PlusCircle size={20} />, color: 'bg-[#FFF5E6] text-[#E5A800]' },
-    { id: 'manage', label: 'Manage Card', type: 'action', icon: <CreditCard size={20} />, color: 'bg-[#F3E8FF] text-[#7C3AED]' },
-    { id: 'invest', label: 'Invest HSA', type: 'action', icon: <TrendingUp size={20} />, color: 'bg-[#ECFDF5] text-wex-success' },
-    { id: 'contribute', label: 'Contribute', type: 'action', icon: <Wallet size={20} />, color: 'bg-[#EDF1FF] text-wex-blue-accent' },
-    { id: 'dental', label: 'Where\'s my claim?', type: 'question' },
-    { id: 'fsa', label: 'How much FSA left?', type: 'question' },
-    { id: 'tx', label: 'Show transactions', type: 'question' },
-    { id: 'decline', label: 'Card was declined', type: 'question' },
   ];
 
   const getContainerStyles = () => {
@@ -130,117 +135,128 @@ const BenefitsDashboardV5_1 = () => {
         
         {/* --- 1. THE CONVERSATIONAL AI HERO --- */}
         <section className="mb-14">
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EDF1FF] text-wex-blue-accent text-[10px] font-bold tracking-widest uppercase mb-6 ${mood === 'concierge' ? 'mx-auto' : ''}`}>
-            <Sparkles size={12} fill="currentColor" />
-            Intelligent Assistant
-          </div>
           
-          <h2 className={`text-[#172DA1] tracking-tight leading-[1.1] mb-6 ${
-            mood === 'concierge' ? 'text-4xl font-light' : 'text-4xl md:text-5xl font-semibold'
-          }`}>
-            Good afternoon, {userName}.
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <motion.h2 
+              className={`text-[#172DA1] tracking-tight leading-[1.1] ${
+                mood === 'concierge' ? 'text-4xl font-light' : 'text-4xl md:text-5xl font-semibold'
+              }`}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+            >
+              Good afternoon, {userName}.
+            </motion.h2>
 
-          <AIGlowBorder
-            borderRadius="1.5rem"
-            duration={4000}
-            containerClassName="mb-8"
-            glowIntensity="medium"
-            showBehindGlow={false}
-          >
-            <div className="rounded-[22px] p-6 md:p-8">
-              <p className="text-lg md:text-xl text-[#5D688C] leading-relaxed mb-8">
-                I've analyzed your recent transactions. You have a <span className="text-[#172DA1] font-bold underline decoration-wex-blue-accent/30 underline-offset-4">$340.00</span> charge from <span className="text-[#172DA1] font-medium">Dental Excellence</span>. 
-                Would you like me to file this claim against your Health FSA now?
-              </p>
-              
-              {!filed ? (
-                <div className={`flex flex-wrap gap-3 ${mood === 'concierge' ? 'justify-center' : 'justify-start'}`}>
-                  <button 
-                    onClick={() => setFiled(true)}
-                    className="bg-[#172DA1] hover:bg-wex-blue-accent text-white px-8 py-4 rounded-2xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-[#172DA1]/20"
-                  >
-                    Yes, File Claim
-                  </button>
-                  <button className="px-8 py-4 rounded-2xl font-bold text-sm text-[#5D688C] hover:bg-[#F5F7FF] transition-colors border border-[#E1E8FF]">
-                    View Details
-                  </button>
-                  <button className="px-8 py-4 rounded-2xl font-bold text-sm text-[#7A87B2] hover:text-[#5D688C] transition-colors">
-                    Maybe later
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-4 text-wex-success bg-[#ECFDF5] p-6 rounded-2xl border border-[#D1FAE5] animate-in zoom-in-95 duration-500">
-                  <div className="w-10 h-10 bg-wex-success rounded-full flex items-center justify-center text-white shadow-lg shadow-wex-success/20">
-                    <CheckCircle2 size={24} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-sm uppercase tracking-wider">Success</p>
-                    <p className="text-[#5D688C] text-sm">Claim #9482 filed. We'll notify you once it's processed.</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </AIGlowBorder>
-
-          {/* --- MORPHING SUGGESTED SECTION --- */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-4 px-2">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#7A87B2]">Suggested for you</h3>
-              <button 
-                onClick={() => setViewMode(viewMode === 'chips' ? 'tiles' : 'chips')}
-                className="flex items-center gap-2 text-[10px] font-bold text-wex-blue-accent uppercase tracking-widest hover:bg-[#EDF1FF] px-3 py-1.5 rounded-full transition-colors"
-              >
-                {viewMode === 'chips' ? (
-                  <><LayoutGrid size={12} /> Show as Tiles</>
-                ) : (
-                  <><List size={12} /> Show as Chips</>
-                )}
-              </button>
-            </div>
-
-            <div className={`transition-all duration-500 ease-in-out ${
-              viewMode === 'chips' 
-                ? 'flex flex-wrap gap-2' 
-                : 'grid grid-cols-2 md:grid-cols-4 gap-4'
-            }`}>
-              {suggestions.map((item, i) => (
-                viewMode === 'chips' ? (
-                  <button
-                    key={i}
-                    className="px-4 py-2 rounded-full bg-white/60 border border-[#E1E8FF] text-sm text-[#5D688C] hover:bg-white hover:border-wex-blue-accent/40 hover:text-[#172DA1] transition-all duration-200 shadow-sm"
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <button 
-                    key={i} 
-                    className="flex flex-col items-center justify-center p-6 bg-white border border-[#E1E8FF] rounded-[24px] hover:border-wex-blue-accent/30 hover:shadow-xl hover:shadow-wex-blue-accent/10 transition-all group shadow-sm"
-                  >
-                    <div className={`w-12 h-12 rounded-2xl ${item.color || 'bg-[#EDF1FF] text-[#5D688C]'} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                      {item.icon || <Sparkles size={20} />}
-                    </div>
-                    <span className="text-[11px] font-bold text-[#5D688C] text-center leading-tight">{item.label}</span>
-                  </button>
-                )
-              ))}
-            </div>
+            {/* AI Badge - V5.2 Style */}
+            <motion.div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#EDF1FF] to-white border border-[#E1E8FF] text-[#172DA1] text-[10px] font-bold tracking-widest uppercase shadow-sm"
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+            >
+              <Sparkles size={12} className="text-[#1C6EFF]" fill="currentColor" />
+              Intelligent Assistant
+            </motion.div>
           </div>
 
-          {/* --- AI COMPOSER (ChatGPT-style open input) --- */}
-          <WexAIComposer mood={mood} hideChips />
+          <motion.div 
+            className="space-y-6"
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
+          >
+            {/* Suggested Action - Enhanced with V5.2 visual ideas */}
+            <AIGlowBorder
+              borderRadius="1.5rem"
+              duration={4000}
+              containerClassName="w-full"
+              glowIntensity="subtle"
+              showBehindGlow={false}
+            >
+              <div className="bg-white rounded-[22px] p-6 md:p-8 relative overflow-hidden group">
+                {/* Subtle decorative background gradient */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#EDF1FF]/50 to-transparent rounded-bl-[100px] pointer-events-none opacity-50" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-start gap-5 mb-6">
+                    {/* Icon Box */}
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1C6EFF] to-[#172DA1] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#1C6EFF]/20 group-hover:scale-105 transition-transform duration-500">
+                      <Zap size={22} className="text-white" fill="currentColor" />
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1C6EFF]">Proactive Insight</span>
+                        <span className="w-1 h-1 bg-[#E1E8FF] rounded-full" />
+                        <span className="text-[10px] font-medium text-[#7A87B2]">Health FSA</span>
+                      </div>
+                      <p className="text-lg md:text-xl text-[#5D688C] leading-relaxed">
+                        I've analyzed your recent transactions. You have a <span className="text-[#172DA1] font-bold underline decoration-wex-blue-accent/30 underline-offset-4">$340.00</span> charge from <span className="text-[#172DA1] font-medium">Dental Excellence</span>. 
+                        Would you like me to file this claim now?
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {!filed ? (
+                    <div className={`flex flex-wrap gap-3 pl-0 md:pl-[68px] ${mood === 'concierge' ? 'justify-center' : 'justify-start'}`}>
+                      <button 
+                        onClick={() => setFiled(true)}
+                        className="group relative overflow-hidden bg-[#172DA1] text-white px-8 py-3.5 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-[#172DA1]/20 flex items-center gap-2"
+                      >
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                        Yes, File Claim
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </button>
+                      <button className="px-6 py-3.5 rounded-xl font-bold text-sm text-[#5D688C] hover:bg-[#F5F7FF] transition-colors border border-[#E1E8FF] hover:border-[#172DA1]/20">
+                        View Details
+                      </button>
+                      <button className="px-6 py-3.5 rounded-xl font-bold text-sm text-[#7A87B2] hover:text-[#5D688C] transition-colors">
+                        Maybe later
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-4 text-wex-success bg-[#ECFDF5] p-5 rounded-xl border border-[#D1FAE5] animate-in zoom-in-95 duration-500 ml-0 md:ml-[68px]">
+                      <div className="w-8 h-8 bg-wex-success rounded-full flex items-center justify-center text-white shadow-lg shadow-wex-success/20">
+                        <CheckCircle2 size={18} />
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm uppercase tracking-wider">Success</p>
+                        <p className="text-[#5D688C] text-sm">Claim #9482 filed. We'll notify you once it's processed.</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </AIGlowBorder>
+
+            {/* --- AI COMPOSER (ChatGPT-style open input) --- */}
+            {/* Integrated directly below the suggestion to feel like one unit */}
+            <div className="relative">
+              <div className="absolute left-8 top-[-24px] w-0.5 h-6 bg-gradient-to-b from-[#E1E8FF] to-transparent" />
+              <WexAIComposer mood={mood} /> {/* Removed hideChips to show suggestions inside */}
+            </div>
+          </motion.div>
         </section>
 
         {/* --- 2. THE ACCOUNT PULSE (Balances) --- */}
-        <section className="mb-14">
-          <div className="flex items-center justify-between mb-6">
+        <motion.section 
+          className="mb-14"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2 }}
+        >
+          <motion.div variants={staggerItem} className="flex items-center justify-between mb-6">
             <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-[#7A87B2]">Your Accounts</h3>
             <button className="text-[10px] font-bold text-wex-blue-accent uppercase tracking-widest hover:underline underline-offset-4">View All Plans</button>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {accounts.map((acc, i) => (
-              <div 
+              <motion.div 
                 key={i} 
+                variants={staggerItem}
                 className="bg-white p-6 rounded-[28px] border border-[#E1E8FF] shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex justify-between items-start mb-4">
@@ -251,23 +267,29 @@ const BenefitsDashboardV5_1 = () => {
                 </div>
                 <p className="text-2xl font-medium tracking-tight text-[#172DA1] mb-1">{acc.balance}</p>
                 <p className="text-[11px] text-[#7A87B2] font-medium">{acc.sub}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* --- 3. ACTIVITY & STATUS --- */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.35 }}
+        >
+          <motion.div variants={staggerItem} className="flex items-center justify-between mb-6">
             <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-[#7A87B2]">Recent Activity</h3>
             <div className="flex items-center gap-1 text-[10px] font-bold text-[#7A87B2] uppercase tracking-widest">
               <Activity size={12} /> Live Updates
             </div>
-          </div>
+          </motion.div>
           <div className="space-y-3">
             {recentActivity.map((item) => (
-              <div 
+              <motion.div 
                 key={item.id} 
+                variants={staggerItem}
                 className="group flex items-center justify-between p-4 bg-white/40 hover:bg-white rounded-2xl border border-transparent hover:border-[#E1E8FF] transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-4">
@@ -288,15 +310,21 @@ const BenefitsDashboardV5_1 = () => {
                   </div>
                   <ChevronRight size={16} className="text-[#B1C0EE] group-hover:text-[#172DA1] transition-colors" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
       </main>
 
       {/* --- FOOTER / COMMAND BAR --- */}
-      <div className="max-w-5xl mx-auto mt-12 pb-12 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
+      <motion.div 
+        className="max-w-5xl mx-auto mt-12 pb-12 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60"
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.5 }}
+      >
         <div className="flex items-center gap-2 text-[11px] font-medium text-[#7A87B2] bg-white px-4 py-2 rounded-full border border-[#E1E8FF] shadow-sm">
           <Command size={14} /> K to search anything
         </div>
@@ -305,7 +333,7 @@ const BenefitsDashboardV5_1 = () => {
           <button className="text-[11px] font-bold text-[#7A87B2] hover:text-[#172DA1] uppercase tracking-widest">Privacy</button>
           <button className="text-[11px] font-bold text-[#7A87B2] hover:text-[#172DA1] uppercase tracking-widest underline decoration-2 underline-offset-8 decoration-wex-blue-accent">Security</button>
         </div>
-      </div>
+      </motion.div>
 
       {/* --- BACKGROUND GRADIENT BLOBS --- */}
       <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#1C6EFF]/10 blur-[150px] rounded-full pointer-events-none z-[-1]" />
