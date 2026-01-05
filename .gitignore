@@ -42,4 +42,6 @@ yarn-error.log*
 
 # Screenshots (optional - remove if you want to keep them)
 screenshots/
+# Allow PNG assets in src/ directory
+!src/**/*.png
 *.png
