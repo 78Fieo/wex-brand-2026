@@ -82,7 +82,7 @@ const DraftsIndex = ({ onViewChange }) => {
             className="text-5xl md:text-6xl font-bold text-[#172DA1] mb-4 tracking-tight"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
-            Design System 2026
+            H&B Branded Homepage Exploration
           </h1>
           
           {/* Subtitle */}
