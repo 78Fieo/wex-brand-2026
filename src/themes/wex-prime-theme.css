@@ -1,0 +1,139 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+ * WEX PRIMEREACT THEME
+ * Maps WEX Design System 2026 tokens to PrimeReact CSS variables
+ * ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Primary Colors - WEX Red */
+  --primary-color: #C8102E;
+  --primary-color-text: #ffffff;
+  --primary-50: #FFE5E9;
+  --primary-100: #FFB8C4;
+  --primary-200: #FF8A9F;
+  --primary-300: #FF5C7A;
+  --primary-400: #FF2E55;
+  --primary-500: #C8102E;
+  --primary-600: #A00D25;
+  --primary-700: #780A1C;
+  --primary-800: #500713;
+  --primary-900: #28040A;
+
+  /* Surface Colors - Glass/Gradient System */
+  --surface-ground: #FDFDFF;
+  --surface-section: #F5F8FF;
+  --surface-card: #FFFFFF;
+  --surface-overlay: rgba(255, 255, 255, 0.95);
+  --surface-border: #E1E8FF;
+  --surface-hover: #EDF1FF;
+
+  /* Text Colors - WEX Blues */
+  --text-color: #172DA1;
+  --text-color-secondary: #5D688C;
+  --text-muted-color: #7A87B2;
+  --text-color-disabled: #B1C0EE;
+
+  /* Content Colors */
+  --content-border-color: #E1E8FF;
+  --divider-color: #E1E8FF;
+  --maskbg: rgba(0, 0, 0, 0.4);
+
+  /* Focus Ring - Accent Blue */
+  --focus-ring: 0 0 0 2px rgba(28, 110, 255, 0.2);
+  --focus-ring-offset: 0;
+
+  /* Border Radius */
+  --border-radius: 0.75rem;
+  --border-radius-sm: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 1.5rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(23, 45, 161, 0.08);
+  --shadow: 0 4px 12px rgba(23, 45, 161, 0.12);
+  --shadow-md: 0 8px 24px rgba(23, 45, 161, 0.15);
+  --shadow-lg: 0 12px 40px rgba(23, 45, 161, 0.18);
+
+  /* Accent Colors */
+  --accent-blue: #1C6EFF;
+  --accent-yellow: #FFBC00;
+  --success-color: #00C48C;
+  --warning-color: #FFBC00;
+  --error-color: #C8102E;
+  --info-color: #1C6EFF;
+}
+
+/* PrimeReact Component Overrides */
+.p-component {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-color);
+}
+
+.p-button {
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.p-button-primary {
+  background: linear-gradient(135deg, var(--primary-color), #FF032B);
+  border: none;
+}
+
+.p-button-primary:hover {
+  background: linear-gradient(135deg, #FF032B, #FF3355);
+  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+}
+
+.p-card {
+  background: linear-gradient(135deg, #FFFFFF, #F5F8FF);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.p-card-body {
+  padding: 1.5rem;
+}
+
+.p-inputtext {
+  border: 1px solid #B1C0EE;
+  border-radius: var(--border-radius);
+  background: var(--surface-ground);
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.p-inputtext:focus {
+  border-color: var(--accent-blue);
+  box-shadow: var(--focus-ring);
+}
+
+.p-progressbar {
+  border-radius: var(--border-radius);
+  background: #EDF1FF;
+}
+
+.p-progressbar-value {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-blue));
+}
+
+/* Chart Container Styling */
+.p-chart {
+  border-radius: var(--border-radius-lg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
